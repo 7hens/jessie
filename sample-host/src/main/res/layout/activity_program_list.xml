@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:ignore="HardcodedText">
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/vRefresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/vProgramList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/vRefresh"
+            tools:listitem="@layout/item_program" />
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+    <TextView
+        android:id="@+id/vTips"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/tips"
+        android:padding="2dp"
+        android:text="@string/refresh_tips"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="12sp" />
+
+</RelativeLayout>

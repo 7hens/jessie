@@ -1,0 +1,72 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply from: '../gradle/publish.gradle'
+apply from: './components.gradle'
+
+android {
+    compileSdkVersion 28
+
+    defaultConfig {
+        minSdkVersion 16
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles 'proguard-rules.pro'
+    }
+    flavorDimensions "components"
+    productFlavors {
+        components {
+            dimension "components"
+        }
+    }
+    testOptions {
+        unitTests {
+            includeAndroidResources = true
+        }
+    }
+    lintOptions {
+        abortOnError false
+        disable 'WrongConstant'
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
+    compileOnly project(':jessie:android-hide')
+    implementation 'cn.thens:okbinder:0.3.1'
+    implementation 'cn.thens:okparcelable:0.1.0'
+
+    testImplementation 'junit:junit:4.12'
+    testImplementation 'org.mockito:mockito-core:2.22.0'
+    testImplementation 'org.robolectric:robolectric:4.2.1'
+    androidTestImplementation 'androidx.test:runner:1.2.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+}
+
+def shell = { String cmd ->
+    println "\$ $cmd"
+    def process = cmd.execute()
+    process.inputStream.eachLine { println ">> $it" }
+    process.waitFor()
+}
+
+task upgradeHook {
+    group 'build setup'
+    dependsOn rootProject.tasks.findByPath(":jessie:android-hook:assemble")
+    doLast {
+        def targetDir = file("src/main/assets/jessie")
+        targetDir.mkdirs()
+
+        def output = new File(targetDir, "android-hook.jar")
+        output.delete()
+
+        def input = rootProject.file("jessie/android-hook/build/libs/android-hook.jar")
+
+        def androidHome = System.getenv("ANDROID_HOME")
+        def dxHome = (new File(androidHome, "build-tools").listFiles().sort().last()).absolutePath
+        shell "$dxHome\\d8.bat --output=${output.absolutePath} ${input.absolutePath}"
+    }
+}

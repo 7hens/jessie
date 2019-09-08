@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <Button
+        android:id="@+id/vStartLocalService"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="startLocalService"
+        android:textAllCaps="false" />
+
+    <Button
+        android:id="@+id/vStopLocalService"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="stopLocalService"
+        android:textAllCaps="false" />
+
+    <Button
+        android:id="@+id/vBindLocalService"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="bindLocalService"
+        android:textAllCaps="false" />
+
+    <Button
+        android:id="@+id/vUnbindLocalService"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="unbindLocalService"
+        android:textAllCaps="false" />
+
+    <View
+        android:background="@android:color/background_dark"
+        android:layout_width="match_parent"
+        android:layout_height="1px"/>
+
+    <Button
+        android:id="@+id/vStartRemoteService"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="startRemoteService"
+        android:textAllCaps="false" />
+
+    <Button
+        android:id="@+id/vStopRemoteService"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="stopRemoteService"
+        android:textAllCaps="false" />
+
+    <Button
+        android:id="@+id/vBindRemoteService"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="bindRemoteService"
+        android:textAllCaps="false" />
+
+    <Button
+        android:id="@+id/vUnbindRemoteService"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="unbindRemoteService"
+        android:textAllCaps="false" />
+
+</LinearLayout>

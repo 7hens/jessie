@@ -1,0 +1,7 @@
+rootProject.name = 'Jessie'
+
+include ':jessie'
+include ':jessie:android-hook'
+include ':jessie:android-hide'
+include ':sample-host'
+include ':sample-plugin'

@@ -1,0 +1,34 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="cn.jessie">
+
+    <application>
+        <provider
+            android:name=".main.MainInitProvider"
+            android:authorities="${applicationId}.jc.init"
+            android:exported="false" />
+
+        <provider
+            android:name=".main.JessieDaemonProvider"
+            android:authorities="${applicationId}.jc.daemon"
+            android:exported="false"
+            android:process=":jcdm" />
+
+        <service
+            android:name=".main.JessieDaemonService"
+            android:process=":jcdm" />
+
+        <activity
+            android:name=".main.JessieLauncherActivity"
+            android:launchMode="singleTask"
+            android:enabled="false">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.HOME" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+    </application>
+</manifest>

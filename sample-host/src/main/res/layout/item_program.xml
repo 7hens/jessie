@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?android:attr/selectableItemBackground"
+    tools:ignore="RtlHardcoded,ContentDescription">
+
+    <View
+        android:id="@+id/vTopPadding"
+        android:layout_width="match_parent"
+        android:layout_height="8dp" />
+
+    <ImageView
+        android:id="@+id/vProgramIcon"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_below="@+id/vTopPadding"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        tools:src="@drawable/ic_launcher_round" />
+
+    <TextView
+        android:id="@+id/vProgramName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/vProgramIcon"
+        android:layout_toRightOf="@+id/vProgramIcon"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        tools:text="应用名" />
+
+    <TextView
+        android:id="@+id/vProgramPackage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/vProgramName"
+        android:layout_alignLeft="@+id/vProgramName"
+        tools:text="package.name" />
+
+    <ImageView
+        android:id="@+id/vProgramStartup"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="8dp"
+        android:background="?android:attr/selectableItemBackground"
+        android:padding="16dp"
+        android:src="@drawable/ic_startup"
+        android:visibility="gone" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_below="@+id/vProgramIcon"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="8dp"
+        android:background="@android:color/darker_gray" />
+</RelativeLayout>

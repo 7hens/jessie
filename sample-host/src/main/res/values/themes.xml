@@ -1,0 +1,7 @@
+<resources>
+
+    <style name="AppTheme" parent="@android:style/Theme.Holo.Light.NoActionBar">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowNoTitle">false</item>
+    </style>
+</resources>
