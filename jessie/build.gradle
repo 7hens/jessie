@@ -2,7 +2,7 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'maven-publish'
-apply from: './components.gradle'
+apply from: 'components.gradle'
 
 group = "com.github.7hens"
 version = "-SNAPSHOT"
@@ -18,12 +18,6 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles 'proguard-rules.pro'
-    }
-    flavorDimensions "components"
-    productFlavors {
-        components {
-            dimension "components"
-        }
     }
     testOptions {
         unitTests {
