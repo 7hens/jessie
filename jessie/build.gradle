@@ -1,7 +1,11 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
-apply from: '../gradle/publish.gradle'
+apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'maven-publish'
 apply from: './components.gradle'
+
+group = "com.github.7hens"
+version = "-SNAPSHOT"
 
 android {
     compileSdkVersion 28

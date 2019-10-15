@@ -3,7 +3,7 @@
 
 # Jessie
 
-[![Download](https://api.bintray.com/packages/7hens/maven/jessie/images/download.svg)](https://bintray.com/7hens/maven/jessie/_latestVersion)
+[![jitpack](https://jitpack.io/v/7hens/jessie.svg)](https://jitpack.io/#7hens/jessie)
 [![license](https://img.shields.io/github/license/7hens/jessie.svg)](https://github.com/7hens/jessie/blob/master/LICENSE)
 
 Jessie 是一个插件化框架，可以让其他 APP 在免安装的情况下直接运行。
@@ -19,16 +19,27 @@ Jessie 可以像一个普通的 library 一样直接添加到宿主程序的依�
 - 支持自定义 Theme
 - 纯 Kotlin 实现
 
-[开发中...](./docs/develop) 
+[开发中...](docs/develop)
 
 ## 开始使用
 
 ### 设置依赖
 
+配置根目录的 build.gradle。
+
+```groovy
+allprojects {
+    repositories {
+        // ...
+        maven { url 'https://jitpack.io' }
+    }
+}
+```
+
 在宿主程序的 build.gradle 中添加下面的依赖，插件程序无需配置。
 
 ```groovy
-implementation "cn.thens:jessie:<last_version>"
+implementation "com.github.7hens:jessie:<last_version>"
 ```
 
 ### 初始化
