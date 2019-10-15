@@ -19,7 +19,7 @@ Jessie 可以像一个普通的 library 一样直接添加到宿主程序的依�
 - 支持自定义 Theme
 - 纯 Kotlin 实现
 
-[开发中...](docs/develop)
+[开发中...](docs/develop.md)
 
 ## 开始使用
 
