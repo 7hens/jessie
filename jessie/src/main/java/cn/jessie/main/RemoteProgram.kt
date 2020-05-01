@@ -1,7 +1,7 @@
 package cn.jessie.main
 
 import android.content.pm.PackageInfo
-import cn.jessie.etc.Logdog
+import cn.jessie.etc.JCLogger
 import cn.jessie.program.DexInfo
 import cn.jessie.program.DexProgram
 
@@ -29,8 +29,8 @@ internal class RemoteProgram(override val packageName: String) : DexProgram() {
         try {
             programManager.stop(packageName)
         } catch (e: Throwable) {
-            Logdog.debug("packageName = $packageName")
-            Logdog.error(e)
+            JCLogger.debug("packageName = $packageName")
+            JCLogger.error(e)
         }
     }
 }

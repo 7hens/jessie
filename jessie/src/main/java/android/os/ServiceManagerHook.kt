@@ -1,11 +1,11 @@
 package android.os
 
-import cn.jessie.etc.Logdog
+import cn.jessie.etc.JCLogger
 
 object ServiceManagerHook {
     @JvmStatic
     fun getService(name: String): IBinder? {
-        Logdog.error("ServiceManagerHook.getService($name)")
+        JCLogger.error("ServiceManagerHook.getService($name)")
         return ServiceManager.getService(name)
     }
 

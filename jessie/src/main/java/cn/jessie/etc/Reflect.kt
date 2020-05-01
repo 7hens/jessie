@@ -51,7 +51,7 @@ internal interface Reflect<T : Any> {
                         "setHiddenApiExemptions", arrayOf<Class<*>>(Array<String>::class.java)) as Method
                 setHiddenApiExemptions.invoke(getRuntime.invoke(null), arrayOf("L"))
             } catch (e: Throwable) {
-                Logdog.error(e)
+                JCLogger.error(e)
             }
         }
 

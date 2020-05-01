@@ -7,7 +7,7 @@ import android.content.pm.*
 import android.os.Build
 import cn.jessie.app.IntentMatcher
 import cn.jessie.app.activity.ActivityStubs
-import cn.jessie.etc.Logdog
+import cn.jessie.etc.JCLogger
 import cn.jessie.program.AndroidPackageComponents
 import cn.jessie.program.DexInfo
 import cn.jessie.program.PluginManager
@@ -235,7 +235,7 @@ internal class JessieProgramManagerImpl private constructor() : IJessieProgramMa
 //            Logdog.debug(result)
             return result
         } catch (e: Throwable) {
-            Logdog.error(e)
+            JCLogger.error(e)
             return mutableListOf()
         }
     }

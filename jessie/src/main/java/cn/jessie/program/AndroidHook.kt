@@ -3,9 +3,8 @@ package cn.jessie.program
 import android.app.Application
 import android.app.Notification
 import android.app.Service
-import android.content.BroadcastReceiver
 import android.content.ContentProvider
-import cn.jessie.etc.Logdog
+import cn.jessie.etc.JCLogger
 import cn.jessie.main.MainAppContext
 import java.io.File
 
@@ -38,7 +37,7 @@ internal object AndroidHook {
                 dexFile.delete()
                 dexFile.createNewFile()
             }
-            Logdog.debug("copy android_hook.jar...")
+            JCLogger.debug("copy android_hook.jar...")
             MainAppContext.get().assets.open(JESSIE_HOOK_JAR)
                     .buffered()
                     .use { it.copyTo(dexFile.outputStream()) }
@@ -58,7 +57,7 @@ internal object AndroidHook {
                     if (!shouldHook) throw RuntimeException()
                     findClass(name)!!
                 } catch (e: Throwable) {
-                    if (shouldHook) Logdog.error(e)
+                    if (shouldHook) JCLogger.error(e)
                     parent.loadClass(name)
                 }
             }

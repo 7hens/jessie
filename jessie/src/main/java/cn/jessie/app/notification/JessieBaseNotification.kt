@@ -8,7 +8,7 @@ import android.graphics.drawable.Icon
 import android.os.Build
 import cn.jessie.app.MyProgram
 import cn.jessie.etc.Bitmaps
-import cn.jessie.etc.Logdog
+import cn.jessie.etc.JCLogger
 import cn.jessie.main.MainAppContext
 
 @Suppress("unused")
@@ -52,10 +52,10 @@ open class JessieBaseNotification : Notification() {
         @TargetApi(Build.VERSION_CODES.M)
         private fun bitmapIcon(resId: Int): Icon? {
             return try {
-                Logdog.debug("resId=$resId\npackageName=${MyProgram.packageName}")
+                JCLogger.debug("resId=$resId\npackageName=${MyProgram.packageName}")
                 Icon.createWithBitmap(Bitmaps.from(getDrawable(resId)))
             } catch (e: Throwable) {
-                Logdog.error(e)
+                JCLogger.error(e)
                 null
             }
         }

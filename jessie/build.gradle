@@ -34,8 +34,9 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
     compileOnly project(':jessie:android-hide')
-    implementation 'cn.thens:okbinder:0.3.1'
+    implementation 'com.github.7hens:okbinder:1.0'
     implementation 'cn.thens:okparcelable:0.1.0'
+    implementation 'com.github.7hens:logdog:0.4'
 
     testImplementation 'junit:junit:4.12'
     testImplementation 'org.mockito:mockito-core:2.22.0'
@@ -63,7 +64,7 @@ task upgradeHook {
 
         def input = rootProject.file("jessie/android-hook/build/libs/android-hook.jar")
 
-        def androidHome = System.getenv("ANDROID_HOME")
+        def androidHome = android.sdkDirectory
         def dxHome = (new File(androidHome, "build-tools").listFiles().sort().last()).absolutePath
         shell "$dxHome\\d8.bat --output=${output.absolutePath} ${input.absolutePath}"
     }

@@ -9,7 +9,7 @@ import cn.jessie.app.SystemServicesHook
 import cn.jessie.app.application.MyProgramApp
 import cn.jessie.app.service.JessieStubService
 import cn.jessie.etc.BinderCursor
-import cn.jessie.etc.Logdog
+import cn.jessie.etc.JCLogger
 import cn.jessie.main.JessieStubComponents
 import cn.jessie.main.MainAppContext
 import cn.thens.okbinder.OkBinder
@@ -23,7 +23,7 @@ abstract class JessieStubProvider : ContentProvider() {
     }
 
     override fun query(uri: Uri, projection: Array<String>?, selection: String?, selectionArgs: Array<String>?, sortOrder: String?): Cursor? {
-        Logdog.debug(uri)
+        JCLogger.debug(uri)
         when (getActionFromUri(uri)) {
             ACTION_EXIT -> {
                 Process.killProcess(Process.myPid())
@@ -41,31 +41,31 @@ abstract class JessieStubProvider : ContentProvider() {
     }
 
     override fun insert(uri: Uri, values: ContentValues?): Uri? {
-        Logdog.debug(uri)
+        JCLogger.debug(uri)
         val programUri = unboxUri(uri) ?: return null
         return provider(programUri).insert(programUri, values)
     }
 
     override fun bulkInsert(uri: Uri, values: Array<ContentValues>): Int {
-        Logdog.debug(uri)
+        JCLogger.debug(uri)
         val programUri = unboxUri(uri) ?: return -1
         return provider(programUri).bulkInsert(programUri, values)
     }
 
     override fun update(uri: Uri, values: ContentValues?, selection: String?, selectionArgs: Array<String>?): Int {
-        Logdog.debug(uri)
+        JCLogger.debug(uri)
         val programUri = unboxUri(uri) ?: return -1
         return provider(programUri).update(programUri, values, selection, selectionArgs)
     }
 
     override fun delete(uri: Uri, selection: String?, selectionArgs: Array<String>?): Int {
-        Logdog.debug(uri)
+        JCLogger.debug(uri)
         val programUri = unboxUri(uri) ?: return -1
         return provider(programUri).delete(programUri, selection, selectionArgs)
     }
 
     override fun getType(uri: Uri): String? {
-        Logdog.debug(uri)
+        JCLogger.debug(uri)
         val programUri = unboxUri(uri) ?: return null
         return provider(programUri).getType(programUri)
     }

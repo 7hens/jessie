@@ -19,7 +19,7 @@ internal object Files {
         return try {
             FileInputStream(file).bufferedReader().use { it.readText() }
         } catch (e: Throwable) {
-            Logdog.error(e)
+            JCLogger.error(e)
             ""
         }
     }

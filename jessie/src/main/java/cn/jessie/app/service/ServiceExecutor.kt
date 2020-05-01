@@ -8,7 +8,7 @@ import android.os.Build
 import android.os.IBinder
 import cn.jessie.app.provider.JessieStubProvider
 import cn.jessie.etc.BinderCursor
-import cn.jessie.etc.Logdog
+import cn.jessie.etc.JCLogger
 import cn.jessie.main.JessieServices
 import cn.jessie.main.MainAppContext
 import cn.jessie.main.Processes
@@ -35,7 +35,7 @@ internal object ServiceExecutor {
             val component = ComponentName(serviceInfo.packageName, serviceInfo.name)
             return getServiceManager(serviceInfo).startService(component, intent)
         } catch (e: Exception) {
-            Logdog.error(e)
+            JCLogger.error(e)
             return null
         }
     }
@@ -49,7 +49,7 @@ internal object ServiceExecutor {
             val component = ComponentName(serviceInfo.packageName, serviceInfo.name)
             return getServiceManager(serviceInfo).stopService(component, intent)
         } catch (e: Exception) {
-            Logdog.error(e)
+            JCLogger.error(e)
             return false
         }
     }
@@ -64,7 +64,7 @@ internal object ServiceExecutor {
             serviceConnection.add(component, conn)
             return getServiceManager(serviceInfo).bindService(component, intent, serviceConnection, flags)
         } catch (e: Exception) {
-            Logdog.error(e)
+            JCLogger.error(e)
             return false
         }
     }
@@ -80,7 +80,7 @@ internal object ServiceExecutor {
             conn.onServiceDisconnected(component)
             getServiceManager(serviceInfo).unbindService(component, serviceConnection)
         } catch (e: Exception) {
-            Logdog.error(e)
+            JCLogger.error(e)
         }
     }
 

@@ -9,7 +9,7 @@ import cn.jessie.Jessie
 import cn.jessie.app.activity.JessieStubActivity
 import cn.jessie.app.provider.ProgramResolver
 import cn.jessie.etc.Init
-import cn.jessie.etc.Logdog
+import cn.jessie.etc.JCLogger
 
 /**
  * Jessie 中的进程分 3 种：
@@ -88,7 +88,7 @@ object Processes {
             if (signIndex == -1) return -1
             return processName.substring(signIndex + 3).toInt()
         } catch (e: Throwable) {
-            Logdog.error(e)
+            JCLogger.error(e)
             return -1
         }
     }

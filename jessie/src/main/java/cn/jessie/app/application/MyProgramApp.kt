@@ -8,7 +8,7 @@ import cn.jessie.app.MyProgram
 import cn.jessie.app.ProgramContext
 import cn.jessie.app.provider.MyProgramProviders
 import cn.jessie.etc.Init
-import cn.jessie.etc.Logdog
+import cn.jessie.etc.JCLogger
 import cn.jessie.etc.Reflections
 import cn.jessie.main.Processes
 import java.lang.reflect.Modifier
@@ -51,14 +51,14 @@ internal object MyProgramApp {
                         try {
                             MyProgramProviders.create(providerInfo)
                         } catch (e: Throwable) {
-                            Logdog.error(e)
+                            JCLogger.error(e)
                         }
                     }
 
             // 4) 执行 Application.onCreate
             app.onCreate()
         } catch (e: Throwable) {
-            Logdog.error(e)
+            JCLogger.error(e)
         }
     }
 

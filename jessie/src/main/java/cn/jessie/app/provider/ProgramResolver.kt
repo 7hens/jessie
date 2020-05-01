@@ -4,7 +4,7 @@ import android.content.ContentResolver
 import android.content.Context
 import android.content.IContentProvider
 import android.net.Uri
-import cn.jessie.etc.Logdog
+import cn.jessie.etc.JCLogger
 import cn.jessie.etc.Reflections
 import cn.jessie.main.JessieServices
 import cn.jessie.main.MainAppContext
@@ -33,13 +33,13 @@ internal class ProgramResolver(context: Context) : ContentResolver(context) {
         val stubProvider = Reflections.invoke(base, "acquireUnstableProvider", context, stubAuthority)
         return Reflections.proxy { _, method, args ->
             if (args == null || args.isEmpty()) {
-                Logdog.debug("provider.${method.name}()")
+                JCLogger.debug("provider.${method.name}()")
                 method.invoke(stubProvider)
             } else {
                 val wrappedArgs = args.map { arg ->
                     if (arg !is Uri) arg else JessieStubProvider.boxUri(arg, providerInfo.packageName, stubAuthority)
                 }.toTypedArray()
-                Logdog.debug("provider.${method.name}(${Arrays.toString(wrappedArgs)})")
+                JCLogger.debug("provider.${method.name}(${Arrays.toString(wrappedArgs)})")
                 method.invoke(stubProvider, *wrappedArgs)
             }
         }
@@ -50,7 +50,7 @@ internal class ProgramResolver(context: Context) : ContentResolver(context) {
             getStubProvider(context, name)
                     ?: Reflections.invoke(base, "acquireProvider", context, name) as? IContentProvider
         } catch (e: Throwable) {
-            Logdog.error(e)
+            JCLogger.error(e)
             null
         }
     }
@@ -60,7 +60,7 @@ internal class ProgramResolver(context: Context) : ContentResolver(context) {
             getStubProvider(context, name)
                     ?: Reflections.invoke(base, "acquireUnstableProvider", context, name) as? IContentProvider
         } catch (e: Throwable) {
-            Logdog.error(e)
+            JCLogger.error(e)
             null
         }
     }
@@ -69,7 +69,7 @@ internal class ProgramResolver(context: Context) : ContentResolver(context) {
         return try {
             return Reflections.invoke(base, "releaseProvider", icp) as Boolean
         } catch (e: Throwable) {
-            Logdog.error(e)
+            JCLogger.error(e)
             false
         }
     }
@@ -78,7 +78,7 @@ internal class ProgramResolver(context: Context) : ContentResolver(context) {
         return try {
             return Reflections.invoke(base, "releaseUnstableProvider", icp) as Boolean
         } catch (e: Throwable) {
-            Logdog.error(e)
+            JCLogger.error(e)
             false
         }
     }
@@ -87,7 +87,7 @@ internal class ProgramResolver(context: Context) : ContentResolver(context) {
         try {
             Reflections.invoke(base, "unstableProviderDied", icp)
         } catch (e: Throwable) {
-            Logdog.error(e)
+            JCLogger.error(e)
         }
     }
 

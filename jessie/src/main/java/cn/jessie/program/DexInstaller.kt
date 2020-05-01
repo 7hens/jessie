@@ -4,7 +4,7 @@ import android.os.Build
 import cn.jessie.etc.AndroidVM
 import cn.jessie.etc.FilePermissions
 import cn.jessie.etc.Files
-import cn.jessie.etc.Logdog
+import cn.jessie.etc.JCLogger
 import java.io.File
 import java.util.*
 import java.util.zip.ZipEntry
@@ -49,9 +49,9 @@ internal object DexInstaller {
                     }
                 }
             }
-            Logdog.debug(debugText)
+            JCLogger.debug(debugText)
         } catch (e: Throwable) {
-            Logdog.error(e)
+            JCLogger.error(e)
             Files.delete(libDir)
         } finally {
             zip.close()

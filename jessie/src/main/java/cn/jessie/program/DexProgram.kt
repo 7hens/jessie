@@ -2,7 +2,7 @@ package cn.jessie.program
 
 import android.content.Context
 import android.content.res.Resources
-import cn.jessie.etc.Logdog
+import cn.jessie.etc.JCLogger
 import cn.jessie.main.MainAppContext
 
 abstract class DexProgram : AbstractProgram() {
@@ -32,7 +32,7 @@ abstract class DexProgram : AbstractProgram() {
         val configRes = resources
         return object : Resources(resources.assets, configRes.displayMetrics, configRes.configuration) {
             override fun getIdentifier(name: String?, defType: String?, defPackage: String?): Int {
-                Logdog.debug("name = $name\ndefType = $defType\ndefPackage = $defPackage")
+                JCLogger.debug("name = $name\ndefType = $defType\ndefPackage = $defPackage")
                 var id = super.getIdentifier(name, defType, packageName)
                 if (id == 0) {
                     id = super.getIdentifier(name, defType, defPackage)
@@ -47,7 +47,7 @@ abstract class DexProgram : AbstractProgram() {
             classLoader
             packageComponents
         } catch (e: Throwable) {
-            Logdog.error(e).error(packageName)
+            JCLogger.error(e).error(packageName)
         }
     }
 

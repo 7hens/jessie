@@ -5,7 +5,7 @@ import android.content.pm.ProviderInfo
 import android.net.Uri
 import cn.jessie.app.MyProgram
 import cn.jessie.app.application.MyProgramApp
-import cn.jessie.etc.Logdog
+import cn.jessie.etc.JCLogger
 import cn.jessie.main.Processes
 
 internal object MyProgramProviders {
@@ -25,7 +25,7 @@ internal object MyProgramProviders {
     }
 
     fun create(providerInfo: ProviderInfo): ContentProvider {
-        Logdog.debug("""
+        JCLogger.debug("""
             provider = ${providerInfo.name}
             authority = ${providerInfo.authority}
             processName = ${providerInfo.processName}

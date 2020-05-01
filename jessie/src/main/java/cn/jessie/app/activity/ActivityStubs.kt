@@ -5,7 +5,7 @@ import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.os.Build
 import android.util.SparseArray
-import cn.jessie.etc.Logdog
+import cn.jessie.etc.JCLogger
 import cn.jessie.etc.NumberPool
 import cn.jessie.main.JessieProgramManagerImpl
 import cn.jessie.main.JessieStubComponents
@@ -34,7 +34,7 @@ internal object ActivityStubs {
         val processIndex = ProcessDispatcher.getProcessIndex(processName)
         val isApplicationNotRunning = processIndex == -1
         val stubActivityName = nameOf(activityInfo)
-        Logdog.debug("component = $component\n" +
+        JCLogger.debug("component = $component\n" +
                 "stubActivityName = $stubActivityName\n" +
                 "isApplicationRunning = ${!isApplicationNotRunning}")
         val wrapIntent = JessieStubActivity.wrapIntent(stubActivityName, intent, component)
@@ -80,7 +80,7 @@ internal object ActivityStubs {
             forceToStopActivity(activityClassNameOf(processIndex, launchMode, number))
             runningStubs.remove(activityKey)
         }
-        Logdog.debug("process=$processIndex, launchMode=$launchMode, number=$number")
+        JCLogger.debug("process=$processIndex, launchMode=$launchMode, number=$number")
         runningStubs[activityKey] = ActivityStubs.ID.of(processIndex, launchMode, number)
         return activityClassNameOf(processIndex, launchMode, number)
     }

@@ -4,7 +4,7 @@ import android.content.IntentFilter
 import android.content.res.AssetManager
 import android.content.res.XmlResourceParser
 import android.os.PatternMatcher
-import cn.jessie.etc.Logdog
+import cn.jessie.etc.JCLogger
 import java.util.*
 
 internal object AndroidManifestParser {
@@ -88,7 +88,7 @@ internal object AndroidManifestParser {
                 tagType = parser.next()
             }
         } catch (e: Exception) {
-            Logdog.error(e)
+            JCLogger.error(e)
         } finally {
             parser?.close()
             return intentFilterMap

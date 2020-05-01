@@ -7,7 +7,7 @@ import android.app.Application
 import android.content.Context
 import android.os.Bundle
 import cn.jessie.Jessie
-import cn.jessie.etc.Logdog
+import cn.jessie.etc.JCLogger
 
 class HostApp : Application() {
     override fun onCreate() {
@@ -48,31 +48,31 @@ class HostApp : Application() {
     private fun manageActivityLifecycleCallbacks() {
         registerActivityLifecycleCallbacks(object : ActivityLifecycleCallbacks {
             override fun onActivityPaused(activity: Activity) {
-                Logdog.debug("${activity.javaClass.name}#onActivityPaused")
+                JCLogger.debug("${activity.javaClass.name}#onActivityPaused")
             }
 
             override fun onActivityResumed(activity: Activity) {
-                Logdog.debug("${activity.javaClass.name}#onActivityResumed")
+                JCLogger.debug("${activity.javaClass.name}#onActivityResumed")
             }
 
             override fun onActivityStarted(activity: Activity) {
-                Logdog.debug("${activity.javaClass.name}#onActivityStarted")
+                JCLogger.debug("${activity.javaClass.name}#onActivityStarted")
             }
 
             override fun onActivityDestroyed(activity: Activity) {
-                Logdog.debug("${activity.javaClass.name}#onActivityDestroyed")
+                JCLogger.debug("${activity.javaClass.name}#onActivityDestroyed")
             }
 
             override fun onActivitySaveInstanceState(activity: Activity, outState: Bundle?) {
-                Logdog.debug("${activity.javaClass.name}#onActivitySaveInstanceState")
+                JCLogger.debug("${activity.javaClass.name}#onActivitySaveInstanceState")
             }
 
             override fun onActivityStopped(activity: Activity) {
-                Logdog.debug("${activity.javaClass.name}#onActivityStopped")
+                JCLogger.debug("${activity.javaClass.name}#onActivityStopped")
             }
 
             override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {
-                Logdog.debug("${activity.javaClass.name}#onActivityCreated")
+                JCLogger.debug("${activity.javaClass.name}#onActivityCreated")
             }
         })
     }

@@ -24,7 +24,7 @@ internal object FilePermissions {
         return try {
             FileUtils.setPermissions(filePath, mode, uid, gid)
         } catch (e: Throwable) {
-            Logdog.error(e)
+            JCLogger.error(e)
             -1
         }
     }

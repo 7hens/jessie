@@ -3,7 +3,6 @@ package cn.jessie.app
 import android.content.pm.PackageInfo
 import android.content.res.Resources
 import cn.jessie.Jessie
-import cn.jessie.etc.Logdog
 import cn.jessie.program.AbstractProgram
 import cn.jessie.program.AndroidPackageComponents
 import cn.jessie.program.DexInfo

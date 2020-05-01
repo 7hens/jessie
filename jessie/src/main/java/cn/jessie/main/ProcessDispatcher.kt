@@ -1,6 +1,6 @@
 package cn.jessie.main
 
-import cn.jessie.etc.Logdog
+import cn.jessie.etc.JCLogger
 import cn.jessie.etc.NumberPool
 import java.util.concurrent.ConcurrentHashMap
 
@@ -53,10 +53,10 @@ internal object ProcessDispatcher {
         return try {
             val process = Processes.all.first { it.pid == pid }
             val index = Processes.getJessieProcessIndex(process.processName)
-            Logdog.warn(process.processName + ", index = $index\n$runningProcessMap")
+            JCLogger.warn(process.processName + ", index = $index\n$runningProcessMap")
             runningProcessMap.entries.first { it.value == index }.key
         } catch (e: Throwable) {
-            Logdog.error(e)
+            JCLogger.error(e)
             ""
         }
     }

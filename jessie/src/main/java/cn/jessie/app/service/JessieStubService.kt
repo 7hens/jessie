@@ -4,9 +4,8 @@ import android.app.Service
 import android.content.ComponentName
 import android.content.Intent
 import android.os.IBinder
-import cn.jessie.etc.Logdog
+import cn.jessie.etc.JCLogger
 import cn.jessie.main.JessieStubComponents
-import cn.jessie.main.JessieStubServices
 import cn.jessie.main.MainAppContext
 import cn.jessie.main.Processes
 
@@ -17,12 +16,12 @@ abstract class JessieStubService : Service() {
         val programIntent = intent.getParcelableExtra<Intent>(EXTRA_INTENT)
         val component = intent.getParcelableExtra<ComponentName>(EXTRA_COMPONENT)
         val action = intent.getIntExtra(EXTRA_ACTION, ACTION_START)
-        Logdog.debug("$programIntent #$action")
+        JCLogger.debug("$programIntent #$action")
         when (action) {
             ACTION_START -> {
                 val service = MyProgramServices.require(this, component)!!
                 service.onStartCommand(programIntent, 0, 0)
-                Logdog.debug(service)
+                JCLogger.debug(service)
             }
             ACTION_STOP -> {
                 MyProgramServices.get(component)?.onDestroy()

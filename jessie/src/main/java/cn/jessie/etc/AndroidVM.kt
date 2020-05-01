@@ -2,7 +2,6 @@ package cn.jessie.etc
 
 import android.annotation.SuppressLint
 import android.os.Build
-import java.util.*
 
 /**
  * @author 7hens
@@ -28,7 +27,7 @@ internal object AndroidVM {
                 Reflections.invoke(runtime!!, "is64Bit") as Boolean
             }
         } catch (e: Throwable) {
-            Logdog.error(e)
+            JCLogger.error(e)
             false
         }
     }

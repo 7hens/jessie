@@ -12,7 +12,6 @@ import android.view.LayoutInflater
 import android.view.MenuInflater
 import android.view.View
 import cn.jessie.app.application.MyProgramApp
-import cn.jessie.etc.Logdog
 import cn.jessie.main.JessieServices
 
 /**

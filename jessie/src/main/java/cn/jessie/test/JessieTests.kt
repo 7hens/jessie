@@ -1,7 +1,7 @@
 package cn.jessie.test
 
 import android.view.LayoutInflater
-import cn.jessie.etc.Logdog
+import cn.jessie.etc.JCLogger
 import cn.jessie.etc.Reflections
 import cn.jessie.main.MainAppContext
 import cn.jessie.program.AndroidHook
@@ -16,7 +16,7 @@ internal object JessieTests {
         constructorMap.values.forEach {
             debugText += it.declaringClass.name + ": " + it.declaringClass.classLoader + "\n"
         }
-        Logdog.debug(debugText)
+        JCLogger.debug(debugText)
     }
 
     fun printClass(clazz: Class<*>) {
@@ -26,7 +26,7 @@ internal object JessieTests {
             result += cls.canonicalName!! + " (${cls.classLoader})\n"
             cls = cls.superclass
         }
-        Logdog.debug(result)
+        JCLogger.debug(result)
     }
 
     fun printClass(className: String) {

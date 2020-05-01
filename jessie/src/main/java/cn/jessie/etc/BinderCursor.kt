@@ -32,7 +32,7 @@ internal class BinderCursor(columnNames: Array<String>, binder: IBinder) : Matri
                 val binderParcelable = extras.getParcelable(KEY_BINDER) as BinderParcelable
                 binderParcelable.binder
             } catch (e: Throwable) {
-                Logdog.error(e)
+                JCLogger.error(e)
                 null
             }
         }

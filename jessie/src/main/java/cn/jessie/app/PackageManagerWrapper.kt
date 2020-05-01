@@ -11,7 +11,7 @@ import android.graphics.Rect
 import android.graphics.drawable.Drawable
 import android.os.Build
 import android.os.UserHandle
-import cn.jessie.etc.Logdog
+import cn.jessie.etc.JCLogger
 import cn.jessie.etc.Reflections
 
 @Suppress("OverridingDeprecatedMember")
@@ -323,7 +323,7 @@ internal open class PackageManagerWrapper(val base: PackageManager) : PackageMan
         return try {
             base.getComponentEnabledSetting(componentName)
         } catch (e: Throwable) {
-            Logdog.error(e)
+            JCLogger.error(e)
             PackageManager.COMPONENT_ENABLED_STATE_ENABLED
         }
     }

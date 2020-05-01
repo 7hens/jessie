@@ -1,7 +1,7 @@
 package cn.jessie.program
 
 import cn.jessie.etc.Files
-import cn.jessie.etc.Logdog
+import cn.jessie.etc.JCLogger
 import cn.jessie.main.MainAppContext
 import cn.jessie.main.Processes
 import java.io.File
@@ -54,14 +54,14 @@ class PluginManager(private val pluginDir: File) {
                 val apkFile = File(appDir, BASK_APK)
                 if (!(apkFile.exists() && apkFile.isFile && apkFile.length() > 0L)) {
                     val result = Files.delete(appDir)
-                    Logdog.error("program($packageName) is missing, removed $result")
+                    JCLogger.error("program($packageName) is missing, removed $result")
                     continue
                 }
                 val dexInfo = DexInstaller.install(apkFile, false)
                 plugins[packageName] = PluginProgram(packageName, dexInfo)
 //                Logdog.debug("install inner program($packageName)")
             } catch (e: Throwable) {
-                Logdog.error(e)
+                JCLogger.error(e)
             }
         }
 //        Logdog.debug("install inner complete")

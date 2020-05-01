@@ -12,7 +12,7 @@ import android.os.Process
 import android.os.ServiceManager
 import cn.jessie.Jessie
 import cn.jessie.etc.Init
-import cn.jessie.etc.Logdog
+import cn.jessie.etc.JCLogger
 import cn.jessie.etc.Reflections
 import cn.jessie.main.JessieServices
 
@@ -36,7 +36,7 @@ internal object SystemServicesHook {
             val iActivityManager = Reflections.get(singleton, "mInstance")!!
             Reflections.set(singleton, "mInstance", proxyActivityManager(iActivityManager))
         } catch (e: Throwable) {
-            Logdog.error(e)
+            JCLogger.error(e)
         }
     }
 
@@ -78,7 +78,7 @@ internal object SystemServicesHook {
                     val cache = declaredField.get(null) as HashMap<String, Any>
                     val binder = ServiceManager.getService(Context.ACTIVITY_SERVICE)
                     cache[Context.ACTIVITY_SERVICE] = Reflections.proxy<IBinder> { _, method, args ->
-                        Logdog.error(method.name)
+                        JCLogger.error(method.name)
                         if (args == null || args.isEmpty()) {
                             method.invoke(binder)
                         } else {
@@ -88,7 +88,7 @@ internal object SystemServicesHook {
                 }
             }
         } catch (e: Throwable) {
-            Logdog.error(e)
+            JCLogger.error(e)
         }
     }
 }

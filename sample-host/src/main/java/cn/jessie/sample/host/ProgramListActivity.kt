@@ -15,7 +15,7 @@ import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import cn.jessie.Jessie
-import cn.jessie.etc.Logdog
+import cn.jessie.etc.JCLogger
 import cn.jessie.program.Program
 import kotlinx.android.synthetic.main.activity_program_list.*
 import kotlinx.android.synthetic.main.item_program.view.*
@@ -85,11 +85,11 @@ class ProgramListActivity : Activity() {
                                 Jessie.install(it)
                                 it.delete()
                             } catch (e: Throwable) {
-                                Logdog.error(e)
+                                JCLogger.error(e)
                             }
                         }
             } catch (e: Throwable) {
-                Logdog.error(e)
+                JCLogger.error(e)
             }
 //            Logdog.debug("preloading programs ...")
             val programs = Jessie.programs.values
@@ -135,7 +135,7 @@ class ProgramListActivity : Activity() {
                     try {
                         program.start()
                     } catch (e: Exception) {
-                        Logdog.error(e)
+                        JCLogger.error(e)
                     }
                 }
                 setOnLongClickListener {

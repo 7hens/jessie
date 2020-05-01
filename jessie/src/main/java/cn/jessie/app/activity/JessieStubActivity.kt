@@ -21,7 +21,7 @@ import cn.jessie.app.ProgramContext
 import cn.jessie.app.application.MyProgramApp
 import cn.jessie.etc.Bitmaps
 import cn.jessie.etc.Init
-import cn.jessie.etc.Logdog
+import cn.jessie.etc.JCLogger
 import cn.jessie.etc.Reflections
 import cn.jessie.main.JessieServices
 import cn.jessie.main.MainAppContext
@@ -43,7 +43,7 @@ abstract class JessieStubActivity : Activity() {
         try {
             ActivityReflections(program.classLoader, programActivity.javaClass)
         } catch (e: Throwable) {
-            Logdog.error(e)
+            JCLogger.error(e)
             ActivityReflections(classLoader, Activity::class.java)
         }
     }
@@ -86,12 +86,12 @@ abstract class JessieStubActivity : Activity() {
             if (themeRes == 0) {
                 themeRes = program.packageInfo.applicationInfo.theme
             }
-            if (themeRes == 0) {
-                @Suppress("DEPRECATION")
-                themeRes = android.R.style.Theme_Holo_Light_NoActionBar
-            }
+//            if (themeRes == 0) {
+//                @Suppress("DEPRECATION")
+//                themeRes = android.R.style.Theme_Holo_Light_NoActionBar
+//            }
         } catch (e: Throwable) {
-            Logdog.error(e)
+            JCLogger.error(e)
         }
         return themeRes
     }
@@ -109,7 +109,7 @@ abstract class JessieStubActivity : Activity() {
             requestedOrientation = programActivityInfo.screenOrientation
             setLabelAndIcon()
         } catch (e: Exception) {
-            Logdog.error(e)
+            JCLogger.error(e)
             finish()
         }
         super.onCreate(savedInstanceState)
@@ -141,7 +141,7 @@ abstract class JessieStubActivity : Activity() {
                 setTaskDescription(ActivityManager.TaskDescription(label, Bitmaps.from(drawable)))
             }
         } catch (e: Throwable) {
-            Logdog.error(e)
+            JCLogger.error(e)
         }
     }
 
@@ -207,7 +207,7 @@ abstract class JessieStubActivity : Activity() {
         try {
             super.startActivityForResult(programManager.wrapActivityIntent(intent), requestCode, options)
         } catch (e: Throwable) {
-            Logdog.error(e)
+            JCLogger.error(e)
         }
     }
 
@@ -296,8 +296,8 @@ abstract class JessieStubActivity : Activity() {
             if (!isInitialized) return null
             invoke(programActivity, *params)
         } catch (e: Throwable) {
-            Logdog.error(if (e is InvocationTargetException) e.cause else e)
-                    .trace()
+            JCLogger.error(if (e is InvocationTargetException) e.cause else e)
+                    .error(Throwable())
             null
         }
     }

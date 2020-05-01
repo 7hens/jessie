@@ -7,7 +7,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import cn.jessie.etc.Init
-import cn.jessie.etc.Logdog
+import cn.jessie.etc.JCLogger
 import io.reactivex.Observable
 import java.util.*
 import java.util.concurrent.ConcurrentHashMap
@@ -39,7 +39,7 @@ class GlobalBroadcast private constructor(private val context: Context) {
                 }
                 callbacks[command]?.invoke(query)
             } catch (e: Throwable) {
-                Logdog.error(e)
+                JCLogger.error(e)
             }
         }
     }
@@ -95,7 +95,7 @@ class GlobalBroadcast private constructor(private val context: Context) {
                     for ((command, record) in records) {
                         buffer.append(command).append(" ").append(record).append("\n")
                     }
-                    Logdog.debug(buffer.toString())
+                    JCLogger.debug(buffer.toString())
                 }
                 .subscribe()
     }

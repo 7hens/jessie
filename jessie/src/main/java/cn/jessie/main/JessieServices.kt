@@ -9,7 +9,7 @@ import android.net.Uri
 import android.os.IBinder
 import cn.jessie.etc.BinderCursor
 import cn.jessie.etc.Init
-import cn.jessie.etc.Logdog
+import cn.jessie.etc.JCLogger
 import cn.jessie.main.JessieServices.DaemonServiceConnection.bindService
 import cn.thens.okbinder.OkBinder
 import java.util.concurrent.ConcurrentHashMap
@@ -34,7 +34,7 @@ internal object JessieServices {
 
     fun initialize(context: Context) {
         if (init.getElseInitialize()) return
-        Logdog.debug("isHost = ${MainAppContext.isHost()}")
+        JCLogger.debug("isHost = ${MainAppContext.isHost()}")
         if (!MainAppContext.isHost()) return
         @Suppress("RemoveRedundantQualifierName")
         DaemonServiceConnection.bindService(context)
