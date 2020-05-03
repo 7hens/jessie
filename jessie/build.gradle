@@ -54,6 +54,8 @@ def shell = { String cmd ->
     process.waitForOrKill(10000)
 }
 
+def androidHookJar = file("src/main/assets/jessie/android-hook.jar")
+
 task upgradeHook {
     group 'build setup'
     dependsOn rootProject.tasks.findByPath(":jessie:android-hook:assembleDebug")
@@ -61,15 +63,18 @@ task upgradeHook {
         def hookBuildDir = rootProject.file("jessie/android-hook/build")
         def input = new File(hookBuildDir, "intermediates/aar_main_jar/debug/classes.jar")
 
-        def targetDir = file("src/main/assets/jessie")
-        targetDir.mkdirs()
-
-        def output = new File(targetDir, "android-hook.jar")
-        output.delete()
+        androidHookJar.parentFile.mkdirs()
+        androidHookJar.delete()
 
         def androidHome = android.sdkDirectory
         def dexHome = new File(androidHome, "build-tools").listFiles().sort().last()
         def dex = new File(dexHome, "d8.bat").absolutePath
-        shell "$dex --output=${output.absolutePath} ${input.absolutePath}"
+        shell "$dex --output=${androidHookJar.absolutePath} ${input.absolutePath}"
+    }
+}
+
+afterEvaluate {
+    if (!androidHookJar.exists()) {
+        tasks.preBuild.dependsOn upgradeHook
     }
 }

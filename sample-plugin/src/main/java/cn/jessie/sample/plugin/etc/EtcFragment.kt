@@ -1,10 +1,12 @@
 package cn.jessie.sample.plugin.etc
 
 import android.annotation.SuppressLint
-import android.app.*
+import android.app.AlertDialog
+import android.app.Notification
+import android.app.NotificationChannel
+import android.app.NotificationManager
 import android.content.Context
 import android.content.Intent
-import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
@@ -16,7 +18,6 @@ import android.widget.Toast
 import androidx.core.app.NotificationCompat
 import androidx.fragment.app.Fragment
 import cn.jessie.sample.plugin.R
-import cn.jessie.sample.plugin.activity.StaticFragmentActivity
 import kotlinx.android.synthetic.main.fragment_main_etc.*
 
 class EtcFragment : Fragment() {
@@ -26,27 +27,10 @@ class EtcFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        vShowNotification.setOnClickListener {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
 
-            }
-            val intent = Intent(requireContext(), StaticFragmentActivity::class.java)
-            val pendingIntent = PendingIntent.getActivity(requireContext(), 0, intent, 0)
-            val notification = getNotificationBuilder()
-                    .setContentTitle("contentTitle")
-                    .setContentText("contentText")
-                    .setSubText("subText")
-                    .setTicker("ticker")
-                    .setSmallIcon(R.drawable.ic_info)
-                    .setLargeIcon(BitmapFactory.decodeResource(resources, R.drawable.ic_launcher_round))
-                    .setAutoCancel(true)
-                    .setContentIntent(pendingIntent)
-                    .build()
-            getNotificationManager().notify(1, notification)
-        }
-        vHideNotification.setOnClickListener {
-            getNotificationManager().cancel(1)
-        }
+        val androidXNotification = AndroidXNotification(requireContext())
+        vShowNotification.setOnClickListener { androidXNotification.show() }
+        vHideNotification.setOnClickListener { androidXNotification.dismiss() }
 
         vShowDialog.setOnClickListener {
             AlertDialog.Builder(requireActivity())
@@ -93,24 +77,6 @@ class EtcFragment : Fragment() {
             }
         } else {
             fn.invoke()
-        }
-    }
-
-
-    @SuppressLint("WrongConstant")
-    private fun getNotificationManager(): NotificationManager {
-        return requireContext().getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-    }
-
-    private fun getNotificationBuilder(): NotificationCompat.Builder {
-        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val channel = NotificationChannel("channelId", "Primary Channel", NotificationManager.IMPORTANCE_DEFAULT);
-            channel.lightColor = Color.GREEN
-            channel.lockscreenVisibility = Notification.VISIBILITY_PRIVATE
-            getNotificationManager().createNotificationChannel(channel)
-            NotificationCompat.Builder(requireContext(), "channelId")
-        } else {
-            NotificationCompat.Builder(requireContext())
         }
     }
 }

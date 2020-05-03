@@ -20,6 +20,7 @@ import static androidx.annotation.RestrictTo.Scope.LIBRARY_GROUP_PREFIX;
 
 import static java.lang.annotation.RetentionPolicy.SOURCE;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Notification;
 import android.app.NotificationIconHook;
@@ -71,6 +72,8 @@ import java.util.List;
 /**
  * Helper for accessing features in {@link android.app.Notification}.
  */
+@SuppressLint("RestrictedApi")
+@SuppressWarnings("JavadocReference")
 public class NotificationCompat {
 
     /**

@@ -22,7 +22,8 @@ internal object AndroidHook {
             ContentProvider::class.java.name,
             "androidx.core.app.NotificationCompat\$Builder",
             "androidx.core.app.NotificationCompatBuilder",
-            "androidx.core.app.NotificationBuilderWithBuilderAccessor"
+            "androidx.core.app.NotificationBuilderWithBuilderAccessor",
+            "android.support.v4.app.NotificationCompat\$Builder"
 //            Notification::class.java.name,
 //            Notification.Builder::class.java.name
     )
