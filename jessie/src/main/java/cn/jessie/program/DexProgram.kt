@@ -55,6 +55,9 @@ abstract class DexProgram : AbstractProgram() {
         : DexInfo.ClassLoader(parent, dexInfo) {
 
         override fun loadClass(name: String, resolve: Boolean): Class<*> {
+            if (name in AndroidHook.hookedClassNames) {
+                return parent.loadClass(name)
+            }
             return findLoadedClass(name) ?: run {
                 try {
                     findClass(name)!!

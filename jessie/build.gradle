@@ -48,24 +48,28 @@ dependencies {
 def shell = { String cmd ->
     println "\$ $cmd"
     def process = cmd.execute()
-    process.inputStream.eachLine { println ">> $it" }
-    process.waitFor()
+    def thread = { runnable -> new Thread(runnable).start() }
+    thread { process.inputStream.eachLine { println ">> $it" } }
+    thread { process.errorStream.eachLine { System.err.println ">> $it" } }
+    process.waitForOrKill(10000)
 }
 
 task upgradeHook {
     group 'build setup'
-    dependsOn rootProject.tasks.findByPath(":jessie:android-hook:assemble")
+    dependsOn rootProject.tasks.findByPath(":jessie:android-hook:assembleDebug")
     doLast {
+        def hookBuildDir = rootProject.file("jessie/android-hook/build")
+        def input = new File(hookBuildDir, "intermediates/aar_main_jar/debug/classes.jar")
+
         def targetDir = file("src/main/assets/jessie")
         targetDir.mkdirs()
 
         def output = new File(targetDir, "android-hook.jar")
         output.delete()
 
-        def input = rootProject.file("jessie/android-hook/build/libs/android-hook.jar")
-
         def androidHome = android.sdkDirectory
-        def dxHome = (new File(androidHome, "build-tools").listFiles().sort().last()).absolutePath
-        shell "$dxHome\\d8.bat --output=${output.absolutePath} ${input.absolutePath}"
+        def dexHome = new File(androidHome, "build-tools").listFiles().sort().last()
+        def dex = new File(dexHome, "d8.bat").absolutePath
+        shell "$dex --output=${output.absolutePath} ${input.absolutePath}"
     }
 }

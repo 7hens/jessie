@@ -2,7 +2,7 @@ package android.app;
 
 import android.content.Context;
 
-public class Notification extends NotificationHook {
+public class Notification2 extends NotificationHook {
 
     public static class Builder extends NotificationHook.Builder {
 

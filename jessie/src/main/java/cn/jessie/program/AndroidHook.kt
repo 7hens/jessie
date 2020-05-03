@@ -1,7 +1,6 @@
 package cn.jessie.program
 
 import android.app.Application
-import android.app.Notification
 import android.app.Service
 import android.content.ContentProvider
 import cn.jessie.etc.JCLogger
@@ -15,14 +14,17 @@ internal object AndroidHook {
 
     private val hookDir by lazy { MainAppContext.dir(HOOK_DIR) }
 
-    private val hookedClassNames = arrayOf(
+    val hookedClassNames = arrayOf(
             Application::class.java.name,
 //            Activity::class.java.name,
             Service::class.java.name,
 //            BroadcastReceiver::class.java.name,
             ContentProvider::class.java.name,
-            Notification::class.java.name,
-            Notification.Builder::class.java.name
+            "androidx.core.app.NotificationCompat\$Builder",
+            "androidx.core.app.NotificationCompatBuilder",
+            "androidx.core.app.NotificationBuilderWithBuilderAccessor"
+//            Notification::class.java.name,
+//            Notification.Builder::class.java.name
     )
 
     fun classLoader(parent: ClassLoader): ClassLoader {
@@ -53,6 +55,7 @@ internal object AndroidHook {
         override fun loadClass(name: String, resolve: Boolean): Class<*> {
             return findLoadedClass(name) ?: run {
                 val shouldHook = name in hookedClassNames
+                JCLogger.onlyIf(shouldHook).debug("hook class $name")
                 return try {
                     if (!shouldHook) throw RuntimeException()
                     findClass(name)!!

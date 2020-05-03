@@ -36,6 +36,10 @@ internal open class PackageManagerWrapper(val base: PackageManager) : PackageMan
         return base.getResourcesForApplication(appPackageName)
     }
 
+    open fun getResourcesForApplicationAsUser(appPackageName: String?, userId: Int): Resources {
+        return Reflections.invoke(base, "getResourcesForApplicationAsUser", appPackageName, userId) as Resources
+    }
+
     override fun getProviderInfo(component: ComponentName?, flags: Int): ProviderInfo {
         return base.getProviderInfo(component, flags)
     }
@@ -124,6 +128,10 @@ internal open class PackageManagerWrapper(val base: PackageManager) : PackageMan
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     override fun getUserBadgedDrawableForDensity(drawable: Drawable?, user: UserHandle?, badgeLocation: Rect?, badgeDensity: Int): Drawable {
         return base.getUserBadgedDrawableForDensity(drawable, user, badgeLocation, badgeDensity)
+    }
+
+    fun getUserBadgeForDensity(user: UserHandle?, density: Int): Drawable? {
+        return Reflections.invoke(base, "getUserBadgeForDensity", user, density) as? Drawable
     }
 
     override fun checkPermission(permName: String?, pkgName: String?): Int {
