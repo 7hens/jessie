@@ -68,8 +68,9 @@ task upgradeHook {
 
         def androidHome = android.sdkDirectory
         def dexHome = new File(androidHome, "build-tools").listFiles().sort().last()
-        def dex = new File(dexHome, "d8.bat").absolutePath
-        shell "$dex --output=${androidHookJar.absolutePath} ${input.absolutePath}"
+        def dex = new File(dexHome, "d8.bat")
+        if (!dex.exists()) dex = new File(dexHome, "d8")
+        shell "$dex --output=$androidHookJar $input"
     }
 }
 
