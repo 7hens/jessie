@@ -113,6 +113,21 @@ abstract class JessieBaseActivity : Activity() {
         return super.getMenuInflater()
     }
 
+    override fun startActivityForResult(intent: Intent?, requestCode: Int) {
+        if (intent == null) return
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+            startActivityForResult(intent, requestCode, null)
+            return
+        }
+        if (isStubInitialized) {
+            stubActivity.startActivityForResult(intent, requestCode)
+        } else {
+            val wrapIntent = programManager.wrapActivityIntent(intent)
+            super.startActivityForResult(wrapIntent, requestCode)
+        }
+    }
+
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     override fun startActivityForResult(intent: Intent?, requestCode: Int, options: Bundle?) {
         if (intent == null) return
 //        Logdog.warn("isStubInitialized = $isStubInitialized\n$intent")

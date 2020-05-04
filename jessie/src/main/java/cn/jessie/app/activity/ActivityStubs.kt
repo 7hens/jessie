@@ -66,12 +66,12 @@ internal object ActivityStubs {
         val stubId = runningStubs[activityKey]
         // FIXME 需要统计 activity 的使用次数，如果 activity 已经使用完毕，应及时释放坑位
         if (stubId != null) {
-            return ActivityStubs.ID.activityName(stubId)
+            return ID.activityName(stubId)
         }
         val processName = Processes.processName(activityInfo)
         val processIndex = ProcessDispatcher.requireProcessIndex(processName)
         val launchMode = getWrappedLaunchMode(activityInfo.launchMode)
-        val key = ActivityStubs.ID.of(processIndex, launchMode, 0)
+        val key = ID.of(processIndex, launchMode, 0)
         val pool = stubPools.get(key, NumberPool(launchModeCounts[launchMode]))
         stubPools.put(key, pool)
         var number = pool.get()
@@ -81,7 +81,7 @@ internal object ActivityStubs {
             runningStubs.remove(activityKey)
         }
         JCLogger.debug("process=$processIndex, launchMode=$launchMode, number=$number")
-        runningStubs[activityKey] = ActivityStubs.ID.of(processIndex, launchMode, number)
+        runningStubs[activityKey] = ID.of(processIndex, launchMode, number)
         return activityClassNameOf(processIndex, launchMode, number)
     }
 

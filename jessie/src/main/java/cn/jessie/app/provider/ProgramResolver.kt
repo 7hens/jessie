@@ -39,7 +39,7 @@ internal class ProgramResolver(context: Context) : ContentResolver(context) {
                 val wrappedArgs = args.map { arg ->
                     if (arg !is Uri) arg else JessieStubProvider.boxUri(arg, providerInfo.packageName, stubAuthority)
                 }.toTypedArray()
-                JCLogger.debug("provider.${method.name}(${Arrays.toString(wrappedArgs)})")
+                JCLogger.debug("provider.${method.name}(${wrappedArgs.contentToString()})")
                 method.invoke(stubProvider, *wrappedArgs)
             }
         }

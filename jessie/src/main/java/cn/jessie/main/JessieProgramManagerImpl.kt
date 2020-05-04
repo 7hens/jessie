@@ -83,7 +83,7 @@ internal class JessieProgramManagerImpl private constructor() : IJessieProgramMa
     }
 
     override fun wrapActivityIntent(intent: Intent): Intent {
-        return ActivityStubs.wrapIntent(intent!!)
+        return ActivityStubs.wrapIntent(intent)
     }
 
     private val packageManager get() = MainAppContext.get().packageManager

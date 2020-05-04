@@ -7,6 +7,7 @@ import cn.jessie.app.application.JessieBaseApplication
 /**
  * @author 7hens
  */
+@Suppress("RedundantOverride")
 open class ApplicationHook : JessieBaseApplication() {
 
     override fun registerActivityLifecycleCallbacks(callback: Application.ActivityLifecycleCallbacks) {

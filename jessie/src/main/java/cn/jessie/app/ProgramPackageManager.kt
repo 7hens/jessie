@@ -15,8 +15,11 @@ internal class ProgramPackageManager(base: PackageManager) : PackageManagerWrapp
     private val programManager get() = JessieServices.programManager
 
     override fun getXml(packageName: String, resid: Int, appInfo: ApplicationInfo): XmlResourceParser {
-        return program.resources.getXml(resid)
-                ?: super.getXml(packageName, resid, appInfo)
+        return try {
+            program.resources.getXml(resid)
+        } catch (e: Throwable) {
+            super.getXml(packageName, resid, appInfo)
+        }
     }
 
     override fun getPackageInfo(packageName: String?, flags: Int): PackageInfo {
@@ -25,8 +28,11 @@ internal class ProgramPackageManager(base: PackageManager) : PackageManagerWrapp
     }
 
     override fun getApplicationLabel(info: ApplicationInfo?): CharSequence {
-        return program.resources.getString(program.packageInfo.applicationInfo.labelRes)
-                ?: super.getApplicationLabel(info)
+        return try {
+            program.resources.getString(program.packageInfo.applicationInfo.labelRes)
+        } catch (e: Throwable) {
+            super.getApplicationLabel(info)
+        }
     }
 
     override fun getApplicationInfo(packageName: String?, flags: Int): ApplicationInfo {

@@ -52,7 +52,7 @@ internal class ProgramLayoutInflater(original: LayoutInflater, newContext: Conte
                     constructors[cacheKey] = constructor
                 }
 
-                val view = constructor!!.newInstance(context, attrs)
+                val view = constructor.newInstance(context, attrs)
                 if (view is ViewStub && Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
                     view.layoutInflater = layoutInflater.cloneInContext(context)
                 }

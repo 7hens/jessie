@@ -29,8 +29,7 @@ internal class BinderCursor(columnNames: Array<String>, binder: IBinder) : Matri
             return try {
                 val extras = cursor.extras
                 extras.classLoader = BinderCursor::class.java.classLoader
-                val binderParcelable = extras.getParcelable(KEY_BINDER) as BinderParcelable
-                binderParcelable.binder
+                extras.getParcelable<BinderParcelable>(KEY_BINDER)?.binder
             } catch (e: Throwable) {
                 JCLogger.error(e)
                 null

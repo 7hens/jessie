@@ -32,7 +32,7 @@ internal object DexInstaller {
 
     private fun copyNativeBinaries(zip: ZipFile, libDir: File) {
         try {
-            var debugText = Arrays.toString(supportedAbis) + "\n"
+            var debugText = supportedAbis.contentToString() + "\n"
             getMappedLibEntries(zip).forEach { (soName, entryMap) ->
                 for (abi in supportedAbis) {
                     if (entryMap.containsKey(abi)) {

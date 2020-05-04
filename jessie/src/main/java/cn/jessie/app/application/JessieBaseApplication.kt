@@ -10,6 +10,7 @@ import java.util.concurrent.ConcurrentHashMap
 /**
  * @author 7hens
  */
+@Suppress("RedundantOverride", "unused")
 abstract class JessieBaseApplication : Application() {
 
     private val activityLifecycleCallbacksMap = ConcurrentHashMap<ActivityLifecycleCallbacks, ActivityLifecycleCallbacks>()

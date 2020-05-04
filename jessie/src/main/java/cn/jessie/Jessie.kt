@@ -1,7 +1,9 @@
 package cn.jessie
 
+import android.annotation.TargetApi
 import android.app.Activity
 import android.content.*
+import android.os.Build
 import android.os.Bundle
 import android.os.Process
 import cn.jessie.app.MyProgram
@@ -67,11 +69,21 @@ object Jessie {
         return programManager.wrapActivityIntent(intent)
     }
 
-    fun startActivity(context: Context, intent: Intent, options: Bundle? = null) {
+    fun startActivity(context: Context, intent: Intent) {
+        context.startActivity(wrapActivityIntent(intent))
+    }
+
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
+    fun startActivity(context: Context, intent: Intent, options: Bundle?) {
         context.startActivity(wrapActivityIntent(intent), options)
     }
 
-    fun startActivityForResult(context: Activity, intent: Intent, requestCode: Int, options: Bundle? = null) {
+    fun startActivityForResult(context: Activity, intent: Intent, requestCode: Int) {
+        context.startActivityForResult(wrapActivityIntent(intent), requestCode)
+    }
+
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
+    fun startActivityForResult(context: Activity, intent: Intent, requestCode: Int, options: Bundle?) {
         context.startActivityForResult(wrapActivityIntent(intent), requestCode, options)
     }
 

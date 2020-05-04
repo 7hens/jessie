@@ -87,7 +87,7 @@ internal object ServiceExecutor {
     private fun resolveIService(intent: Intent): ServiceInfo? {
         val services = programManager.queryIntentServices(intent, 0)
         if (services.isEmpty()) {
-//            Logdog.error(intent).trace()
+            JCLogger.error(intent).error(Throwable())
         }
         return services.firstOrNull()?.serviceInfo
     }
