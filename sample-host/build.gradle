@@ -31,7 +31,8 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation project(':jessie')
+//    implementation project(':jessie')
+    implementation 'com.github.7hens:jessie:0.2'
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
     implementation 'androidx.appcompat:appcompat:1.1.0-rc01'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
@@ -50,14 +51,16 @@ dependencies {
 def shell = { String cmd ->
     println "\$ $cmd"
     def process = cmd.execute()
-    process.inputStream.eachLine { println ">> $it" }
-    process.waitFor()
+    def thread = { runnable -> new Thread(runnable).start() }
+    thread { process.inputStream.eachLine { println ">> $it" } }
+    thread { process.errorStream.eachLine { System.err.println ">> $it" } }
+    process.waitForOrKill(10000)
 }
 
 task installPlugin {
     def pluginApkPath = rootProject.file("sample-plugin/build/outputs/apk/debug/sample-plugin-debug.apk")
 
-    group = 'install'
+    group = 'jessie'
     dependsOn ":sample-plugin:assembleDebug"
     doLast {
         shell "adb push $pluginApkPath /sdcard/jc_plugins/cn.jessie.sample.plugin.apk"

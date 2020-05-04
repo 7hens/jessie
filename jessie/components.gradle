@@ -132,7 +132,7 @@ def manifestComponents = "" +
         "\n        <!-- endregion -->"
 
 task genComponents {
-    group 'build setup'
+    group 'jessie'
     doLast {
         try {
             def classDirectory = project.file("src/main/java/cn/jessie/main")

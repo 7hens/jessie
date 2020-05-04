@@ -57,11 +57,10 @@ def shell = { String cmd ->
 def androidHookJar = file("src/main/assets/jessie/android-hook.jar")
 
 task upgradeHook {
-    group 'build setup'
+    group 'jessie'
     dependsOn rootProject.tasks.findByPath(":jessie:android-hook:assembleDebug")
     doLast {
-        def hookBuildDir = rootProject.file("jessie/android-hook/build")
-        def input = new File(hookBuildDir, "intermediates/aar_main_jar/debug/classes.jar")
+        def input = file("android-hook/build/intermediates/aar_main_jar/debug/classes.jar")
 
         androidHookJar.parentFile.mkdirs()
         androidHookJar.delete()
