@@ -2,6 +2,7 @@ package cn.jessie.runtime.main
 
 import cn.jessie.runtime.etc.JCLogger
 import cn.jessie.runtime.etc.NumberPool
+import cn.jessie.stub.JessieStubComponents
 import java.util.concurrent.ConcurrentHashMap
 
 /**

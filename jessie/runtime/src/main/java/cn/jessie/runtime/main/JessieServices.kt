@@ -24,7 +24,7 @@ internal object JessieServices {
     private const val PROGRAM = "program"
 
     private val init = Init.create()
-    private val uri by lazy { Uri.parse("content://" + JessieDaemonProvider.authority) }
+    private val uri by lazy { Uri.parse("content://" + JessieDaemonProviderImpl.authority) }
 
     private fun query(context: Context, name: String): IBinder? {
         return context.contentResolver.query(uri, null, name, null, null)?.use { cursor ->

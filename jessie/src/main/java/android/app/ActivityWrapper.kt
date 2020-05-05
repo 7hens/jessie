@@ -18,7 +18,7 @@ import android.util.AttributeSet
 import android.view.*
 import android.view.accessibility.AccessibilityEvent
 import android.widget.Toolbar
-import cn.jessie.etc.Reflections
+import cn.jessie.etc.ReflectionUtils
 import java.io.FileDescriptor
 import java.io.PrintWriter
 import java.util.function.Consumer
@@ -43,10 +43,6 @@ abstract class ActivityWrapper : Activity() {
         base.onAttachedToWindow()
     }
 
-    override fun getWindowManager(): WindowManager {
-        return base.getWindowManager()
-    }
-
     override fun startNextMatchingActivity(intent: Intent): Boolean {
         return base.startNextMatchingActivity(intent)
     }
@@ -56,7 +52,7 @@ abstract class ActivityWrapper : Activity() {
     }
 
     override fun <T : View?> findViewById(id: Int): T {
-        return base.findViewById(id)
+        return base.findViewById<T>(id)
     }
 
     override fun startIntentSenderForResult(intent: IntentSender?, requestCode: Int, fillInIntent: Intent?, flagsMask: Int, flagsValues: Int, extraFlags: Int) {
@@ -94,14 +90,6 @@ abstract class ActivityWrapper : Activity() {
     override fun onPause() {
         super.onPause()
         base.onPause()
-    }
-
-    override fun getIntent(): Intent {
-        return base.getIntent()
-    }
-
-    override fun isFinishing(): Boolean {
-        return base.isFinishing()
     }
 
     override fun getMenuInflater(): MenuInflater {
@@ -211,10 +199,6 @@ abstract class ActivityWrapper : Activity() {
 
     override fun postponeEnterTransition() {
         base.postponeEnterTransition()
-    }
-
-    override fun setTheme(resid: Int) {
-        base.setTheme(resid)
     }
 
     override fun onPerformDirectAction(actionId: String, arguments: Bundle, cancellationSignal: CancellationSignal, resultListener: Consumer<Bundle>) {
@@ -555,6 +539,7 @@ abstract class ActivityWrapper : Activity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        ReflectionUtils.copyFields(Activity::class.java, this, base)
         base.onCreate(savedInstanceState)
     }
 
@@ -649,10 +634,6 @@ abstract class ActivityWrapper : Activity() {
 
     override fun startManagingCursor(c: Cursor?) {
         base.startManagingCursor(c)
-    }
-
-    override fun getComponentName(): ComponentName {
-        return base.getComponentName()
     }
 
     override fun onResume() {
@@ -903,10 +884,6 @@ abstract class ActivityWrapper : Activity() {
         return base.onCreateThumbnail(outBitmap, canvas)
     }
 
-    override fun getWindow(): Window {
-        return base.getWindow()
-    }
-
     override fun onMenuItemSelected(featureId: Int, item: MenuItem): Boolean {
         return base.onMenuItemSelected(featureId, item)
     }
@@ -916,6 +893,7 @@ abstract class ActivityWrapper : Activity() {
     }
 
     override fun attachBaseContext(newBase: Context?) {
+        super.attachBaseContext(newBase)
         base.attachBaseContext(newBase)
     }
 

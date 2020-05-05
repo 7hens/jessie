@@ -7,6 +7,7 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Process
 import cn.jessie.Jessie
+import cn.jessie.program.Program
 import cn.jessie.runtime.app.MyProgram
 import cn.jessie.runtime.app.provider.ProgramResolver
 import cn.jessie.runtime.app.service.ServiceExecutor
@@ -14,7 +15,6 @@ import cn.jessie.runtime.main.JessieServices
 import cn.jessie.runtime.main.MainAppContext
 import cn.jessie.runtime.main.RemoteProgram
 import cn.jessie.runtime.program.AppProgram
-import cn.jessie.program.Program
 import java.io.File
 
 /**

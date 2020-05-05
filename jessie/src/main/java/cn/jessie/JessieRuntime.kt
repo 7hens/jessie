@@ -7,10 +7,11 @@ import cn.jessie.program.DexInstaller
 import java.io.File
 import java.util.concurrent.atomic.AtomicBoolean
 
+@Suppress("SameParameterValue")
 internal object JessieRuntime {
     private const val JESSIE_IMPL = "cn.jessie.runtime.JessieImpl"
-    private const val MAIN_PROVIDER = "cn.jessie.runtime.MainInitProvider"
-    private const val DAEMON_PROVIDER = "cn.jessie.runtime.JessieDaemonProvider"
+    private const val MAIN_PROVIDER = "cn.jessie.runtime.main.MainInitProviderImpl"
+    private const val DAEMON_PROVIDER = "cn.jessie.runtime.main.JessieDaemonProviderImpl"
 
     private const val RUNTIME_JAR = "jessie/jessie-runtime.jar"
     private const val RUNTIME_DIR = "runtime"
@@ -59,9 +60,9 @@ internal object JessieRuntime {
         return classLoader.loadClass(name).newInstance() as T
     }
 
-    val mainProvider by lazy { get<ContentProvider>(MAIN_PROVIDER) }
+    val mainProvider by lazy { create<ContentProvider>(MAIN_PROVIDER) }
 
-    val daemonProvider by lazy { get<ContentProvider>(DAEMON_PROVIDER) }
+    val daemonProvider by lazy { create<ContentProvider>(DAEMON_PROVIDER) }
 
     val jessie by lazy { get<Jessie>(JESSIE_IMPL) }
 }

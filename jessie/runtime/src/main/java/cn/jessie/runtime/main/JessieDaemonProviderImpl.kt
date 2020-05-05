@@ -2,6 +2,8 @@ package cn.jessie.runtime.main
 
 import android.content.ContentProvider
 import android.content.ContentValues
+import android.content.Context
+import android.content.pm.ProviderInfo
 import android.database.Cursor
 import android.net.Uri
 import cn.jessie.runtime.etc.BinderCursor
@@ -11,10 +13,14 @@ import cn.jessie.runtime.etc.BinderCursor
  *
  * 用来和其他进程交互，并传递 Binder。
  */
-class JessieDaemonProvider : ContentProvider() {
-    override fun onCreate(): Boolean {
+class JessieDaemonProviderImpl : ContentProvider() {
+    override fun attachInfo(context: Context?, info: ProviderInfo?) {
         MainAppContext.initialize(context!!)
         JessieServices.Daemon.initialize()
+        super.attachInfo(context, info)
+    }
+
+    override fun onCreate(): Boolean {
         return true
     }
 

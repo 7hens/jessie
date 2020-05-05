@@ -2,6 +2,8 @@ package cn.jessie.runtime.app.provider
 
 import android.content.ContentProvider
 import android.content.ContentValues
+import android.content.Context
+import android.content.pm.ProviderInfo
 import android.database.Cursor
 import android.net.Uri
 import android.os.Process
@@ -10,15 +12,19 @@ import cn.jessie.runtime.app.application.MyProgramApp
 import cn.jessie.runtime.app.service.JessieStubService
 import cn.jessie.runtime.etc.BinderCursor
 import cn.jessie.runtime.etc.JCLogger
-import cn.jessie.runtime.main.JessieStubComponents
 import cn.jessie.runtime.main.MainAppContext
+import cn.jessie.stub.JessieStubComponents
 import cn.thens.okbinder.OkBinder
 
-abstract class JessieStubProvider : ContentProvider() {
-    override fun onCreate(): Boolean {
+class JessieStubProvider : ContentProvider() {
+    override fun attachInfo(context: Context?, info: ProviderInfo?) {
+        super.attachInfo(context, info)
         MainAppContext.initialize(context!!)
         SystemServicesHook.initialize()
         MyProgramApp.initialize(MainAppContext.get())
+    }
+
+    override fun onCreate(): Boolean {
         return true
     }
 

@@ -6,7 +6,7 @@ package cn.jessie.stub
 
 import cn.jessie.JessieRuntime
 
-internal object JessieStubComponents {
+object JessieStubComponents {
     const val PROCESS_COUNT = 20
     const val SERVICE_COUNT = 10
     val ACTIVITY_LAUNCH_MODE_COUNTS = intArrayOf(10, 5, 3, 4)

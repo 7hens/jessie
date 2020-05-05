@@ -17,7 +17,7 @@ abstract class DexProgram : AbstractProgram() {
     }
 
     override val classLoader: ClassLoader by lazy {
-        MainAppContext.get().classLoader
+        DexProgram::class.java.classLoader!!
                 .let { AndroidHook.classLoader(it) }
                 .let { PluginClassLoader(it, dexInfo) }
     }

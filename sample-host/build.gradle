@@ -69,3 +69,7 @@ task installPlugin {
         println '>> ** install success ** <<'
     }
 }
+
+afterEvaluate {
+    tasks.preBuild.dependsOn rootProject.tasks.findByPath(":jessie:upgradeRuntime")
+}

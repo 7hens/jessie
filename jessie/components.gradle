@@ -20,7 +20,7 @@ def JessieStubComponents = "" +
         "\n" +
         "\nimport cn.jessie.JessieRuntime" +
         "\n" +
-        "\ninternal object JessieStubComponents {" +
+        "\nobject JessieStubComponents {" +
         "\n    const val PROCESS_COUNT = $processCount" +
         "\n    const val SERVICE_COUNT = $serviceCount" +
         "\n    val ACTIVITY_LAUNCH_MODE_COUNTS = intArrayOf(" +

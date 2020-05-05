@@ -8,9 +8,9 @@ import android.util.SparseArray
 import cn.jessie.runtime.etc.JCLogger
 import cn.jessie.runtime.etc.NumberPool
 import cn.jessie.runtime.main.JessieProgramManagerImpl
-import cn.jessie.runtime.main.JessieStubComponents
 import cn.jessie.runtime.main.ProcessDispatcher
 import cn.jessie.runtime.main.Processes
+import cn.jessie.stub.JessieStubComponents
 
 internal object ActivityStubs {
     private val shouldMatchesLaunchMode = "true".toBoolean()

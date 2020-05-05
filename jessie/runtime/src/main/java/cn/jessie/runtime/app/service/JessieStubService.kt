@@ -5,16 +5,16 @@ import android.content.ComponentName
 import android.content.Intent
 import android.os.IBinder
 import cn.jessie.runtime.etc.JCLogger
-import cn.jessie.runtime.main.JessieStubComponents
 import cn.jessie.runtime.main.MainAppContext
 import cn.jessie.runtime.main.Processes
+import cn.jessie.stub.JessieStubComponents
 
-abstract class JessieStubService : Service() {
+class JessieStubService : Service() {
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         val result = super.onStartCommand(intent, flags, startId)
         if (intent == null) return result
         val programIntent = intent.getParcelableExtra<Intent>(EXTRA_INTENT)
-        val component = intent.getParcelableExtra<ComponentName>(EXTRA_COMPONENT)
+        val component = intent.getParcelableExtra<ComponentName>(EXTRA_COMPONENT)!!
         val action = intent.getIntExtra(EXTRA_ACTION, ACTION_START)
         JCLogger.debug("$programIntent #$action")
         when (action) {

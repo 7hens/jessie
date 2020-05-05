@@ -4,6 +4,7 @@
 .settings/
 captures/
 build/
+#jessie/src/main/assets/jessie/
 *.iml
 local.properties
 .project

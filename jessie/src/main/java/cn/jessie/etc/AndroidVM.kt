@@ -22,9 +22,9 @@ internal object AndroidVM {
             if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
                 false
             } else {
-                val _VMRuntime = Class.forName("dalvik.system.VMRuntime")
-                val runtime = Reflections.invoke(_VMRuntime, "getRuntime")
-                Reflections.invoke(runtime!!, "is64Bit") as Boolean
+                val cVMRuntime = Class.forName("dalvik.system.VMRuntime")
+                val runtime = cVMRuntime.getDeclaredMethod("getRuntime").invoke(null)
+                cVMRuntime.getDeclaredMethod("is64Bit").invoke(runtime) as Boolean
             }
         } catch (e: Throwable) {
             JCLogger.error(e)

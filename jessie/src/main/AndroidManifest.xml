@@ -18,7 +18,7 @@
             android:process=":jcdm" />
 
         <activity
-            android:name=".main.JessieLauncherActivity"
+            android:name=".stub.JessieLauncherActivity"
             android:launchMode="singleTask"
             android:enabled="false">
             <intent-filter>

@@ -9,9 +9,9 @@ import android.content.ContentProviderWrapper
 import cn.jessie.JessieRuntime
 
 object JessieStub {
-    private const val STUB_ACTIVITY = "cn.jessie.runtime.main.JessieStubACTIVITY"
-    private const val STUB_SERVICE = "cn.jessie.runtime.main.JessieStubService"
-    private const val STUB_PROVIDER = "cn.jessie.runtime.main.JessieStubProvider"
+    private const val STUB_ACTIVITY = "cn.jessie.runtime.app.activity.JessieStubActivity"
+    private const val STUB_SERVICE = "cn.jessie.runtime.app.service.JessieStubService"
+    private const val STUB_PROVIDER = "cn.jessie.runtime.app.provider.JessieStubProvider"
 
     abstract class BaseActivity : ActivityWrapper() {
         override val base by lazy { JessieRuntime.create<Activity>(STUB_ACTIVITY) }

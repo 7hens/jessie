@@ -1,5 +1,7 @@
 package android.app
 
+import android.content.Context
+import android.content.ContextWrapper
 import android.content.Intent
 import android.content.res.Configuration
 import android.os.IBinder
@@ -8,6 +10,15 @@ import java.io.PrintWriter
 
 abstract class ServiceWrapper : Service() {
     abstract val base: Service
+
+    override fun attachBaseContext(newBase: Context?) {
+        super.attachBaseContext(newBase)
+        val cContextWrapper = ContextWrapper::class.java
+        val cContext = Context::class.java
+        val attachBaseContext = cContextWrapper.getDeclaredMethod("attachBaseContext", cContext)
+        attachBaseContext.isAccessible = true
+        attachBaseContext.invoke(base, this)
+    }
 
     override fun onConfigurationChanged(newConfig: Configuration) {
         base.onConfigurationChanged(newConfig)

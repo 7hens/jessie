@@ -2,18 +2,21 @@ package cn.jessie.runtime.main
 
 import android.content.ContentProvider
 import android.content.ContentValues
+import android.content.Context
+import android.content.pm.ProviderInfo
 import android.database.Cursor
 import android.net.Uri
 import cn.jessie.runtime.test.JessieTests
 
-class MainInitProvider : ContentProvider() {
-    override fun onCreate(): Boolean {
-        val context = this.context!!
-        MainAppContext.initialize(context)
+class MainInitProviderImpl : ContentProvider() {
+
+    override fun attachInfo(context: Context?, info: ProviderInfo?) {
+        super.attachInfo(context, info)
+        MainAppContext.initialize(context!!)
         JessieServices.initialize(context)
-//        JessieTests.printClass("android.app.Application")
-//        JessieTests.printClass("android.app.Activity")
-//        JessieTests.printClass("android.webkit.WebView")
+    }
+
+    override fun onCreate(): Boolean {
         return true
     }
 

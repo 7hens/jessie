@@ -1,5 +1,6 @@
 package cn.jessie.runtime.app.activity
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.ActivityManager
 import android.app.Application
@@ -32,7 +33,8 @@ import java.lang.reflect.InvocationTargetException
 import java.lang.reflect.Method
 import java.lang.reflect.Modifier
 
-abstract class JessieStubActivity : Activity() {
+@SuppressLint("MissingSuperCall")
+class JessieStubActivity : Activity() {
     internal lateinit var programActivity: Activity
     private lateinit var programActivityInfo: ActivityInfo
     private val program: Program = MyProgram
@@ -112,7 +114,6 @@ abstract class JessieStubActivity : Activity() {
             JCLogger.error(e)
             finish()
         }
-        super.onCreate(savedInstanceState)
         savedInstanceState?.classLoader = classLoader
         reflections.onCreate.call(savedInstanceState)
     }
@@ -154,51 +155,41 @@ abstract class JessieStubActivity : Activity() {
 
     override fun onWindowAttributesChanged(params: WindowManager.LayoutParams?) {
         runOnReady.post { programActivity.onWindowAttributesChanged(params) }
-        super.onWindowAttributesChanged(params)
     }
 
     override fun onWindowFocusChanged(hasFocus: Boolean) {
-        super.onWindowFocusChanged(hasFocus)
         if (isInitialized) programActivity.onWindowFocusChanged(hasFocus)
     }
 
     override fun onPostCreate(savedInstanceState: Bundle?) {
-        super.onPostCreate(savedInstanceState)
         reflections.onPostCreate.call(savedInstanceState)
     }
 
     override fun onStart() {
-        super.onStart()
         reflections.onStart.call()
     }
 
     override fun onRestart() {
-        super.onRestart()
         reflections.onRestart.call()
     }
 
     override fun onResume() {
-        super.onResume()
         reflections.onResume.call()
     }
 
     override fun onPostResume() {
-        super.onPostResume()
         reflections.onPostResume.call()
     }
 
     override fun onPause() {
-        super.onPause()
         reflections.onPause.call()
     }
 
     override fun onStop() {
-        super.onStop()
         reflections.onStop.call()
     }
 
     override fun onDestroy() {
-        super.onDestroy()
         reflections.onDestroy.call()
     }
 
@@ -212,32 +203,26 @@ abstract class JessieStubActivity : Activity() {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
         reflections.onActivityResult.call(requestCode, resultCode, data)
     }
 
     override fun onNewIntent(intent: Intent?) {
-        super.onNewIntent(intent)
         reflections.onNewIntent.call(intent)
     }
 
     override fun onSaveInstanceState(outState: Bundle?) {
-        super.onSaveInstanceState(outState)
         reflections.onSaveInstanceState.call(outState)
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
-        super.onRestoreInstanceState(savedInstanceState)
         reflections.onRestoreInstanceState.call(savedInstanceState)
     }
 
     override fun onAttachedToWindow() {
-        super.onAttachedToWindow()
         reflections.onAttachedToWindow.call()
     }
 
     override fun onDetachedFromWindow() {
-        super.onDetachedFromWindow()
         reflections.onDetachedFromWindow.call()
     }
 
@@ -265,12 +250,10 @@ abstract class JessieStubActivity : Activity() {
 
     override fun dispatchKeyEvent(event: KeyEvent?): Boolean {
         if (event == null) return false
-        super.dispatchKeyEvent(event)
         return programActivity.dispatchKeyEvent(event)
     }
 
     override fun onBackPressed() {
-        super.onBackPressed()
         reflections.onBackPressed.call()
     }
 
