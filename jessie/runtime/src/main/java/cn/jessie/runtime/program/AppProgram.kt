@@ -23,7 +23,7 @@ internal class AppProgram(private val app: Context) : AbstractProgram() {
     override val packageInfo: PackageInfo by lazy { AndroidPackageInfo.get(app) }
 
     override val packageComponents: AndroidPackageComponents by lazy {
-        AndroidPackageComponents.parse(packageInfo, resources.assets)
+        AndroidPackageComponentsParser.parse(packageInfo, resources.assets)
     }
 
     override fun preload() {

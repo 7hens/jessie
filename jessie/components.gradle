@@ -16,7 +16,9 @@ def JessieStubComponents = "" +
         "\n/**" +
         "\n * $comments" +
         "\n */" +
-        "\npackage cn.jessie.main" +
+        "\npackage cn.jessie.stub" +
+        "\n" +
+        "\nimport cn.jessie.JessieRuntime" +
         "\n" +
         "\ninternal object JessieStubComponents {" +
         "\n    const val PROCESS_COUNT = $processCount" +
@@ -28,15 +30,15 @@ def JessieStubComponents = "" +
         ")" +
         "\n" +
         "\n    fun getActivityClassName(processIndex: Int, launchMode: Int, number: Int): String {" +
-        "\n        return \"cn.jessie.main.JessieStubActivities\\\$P\${processIndex}LM\${launchMode}N\$number\"" +
+        "\n        return \"cn.jessie.stub.JessieStubActivities\\\$P\${processIndex}LM\${launchMode}N\$number\"" +
         "\n    }" +
         "\n" +
         "\n    fun getServiceClassName(processIndex: Int, number: Int): String {" +
-        "\n        return \"cn.jessie.main.JessieStubServices\\\$P\$processIndex\"" +
+        "\n        return \"cn.jessie.stub.JessieStubServices\\\$P\$processIndex\"" +
         "\n    }" +
         "\n" +
         "\n    fun getProviderAuthority(processIndex: Int): String {" +
-        "\n        return cn.jessie.main.MainAppContext.packageName + \".jc\" + processIndex" +
+        "\n        return JessieRuntime.context.packageName + \".jc\" + processIndex" +
         "\n    }" +
         "\n" +
         "\n}"
@@ -45,11 +47,10 @@ def JessieStubActivities = "" +
         "\n/**" +
         "\n * $comments" +
         "\n */" +
-        "\npackage cn.jessie.main" +
+        "\npackage cn.jessie.stub" +
         "\n" +
         "\nobject JessieStubActivities {" +
-        "\n    abstract class Base : cn.jessie.app.activity.JessieStubActivity()" +
-        "\n    class P%dLM%dN%d : Base()".with { format ->
+        "\n    class P%dLM%dN%d : JessieStub.BaseActivity()".with { format ->
             (0..processCount - 1).stream().map { process ->
                 (0..activityLaunchModeCounts.size() - 1).stream().map { index ->
                     def count = activityLaunchModeCounts.values()[index]
@@ -65,11 +66,10 @@ def JessieStubServices = "" +
         "\n/**" +
         "\n * $comments" +
         "\n */" +
-        "\npackage cn.jessie.main" +
+        "\npackage cn.jessie.stub" +
         "\n" +
         "\nobject JessieStubServices {" +
-        "\n    abstract class Base : cn.jessie.app.service.JessieStubService()" +
-        "\n    class P%d : Base()".with { format ->
+        "\n    class P%d : JessieStub.BaseService()".with { format ->
             (0..processCount - 1).stream().map {
                 String.format(format, it)
             }.collect(Collectors.joining())
@@ -80,11 +80,10 @@ def JessieStubProviders = "" +
         "\n/**" +
         "\n * $comments" +
         "\n */" +
-        "\npackage cn.jessie.main" +
+        "\npackage cn.jessie.stub" +
         "\n" +
         "\nobject JessieStubProviders {" +
-        "\n    abstract class Base : cn.jessie.app.provider.JessieStubProvider()" +
-        "\n    class P%d : Base()".with { format ->
+        "\n    class P%d : JessieStub.BaseProvider()".with { format ->
             (0..processCount - 1).stream().map {
                 String.format(format, it)
             }.collect(Collectors.joining())
@@ -96,7 +95,7 @@ def manifestComponents = "" +
         "\n        <!-- region gen manifest -->" +
         "\n        <!-- $comments -->" + ("" +
         "\n        <activity" +
-        "\n            android:name=\".main.JessieStubActivities\$P%dLM%dN%d\"" +
+        "\n            android:name=\".stub.JessieStubActivities\$P%dLM%dN%d\"" +
         "\n            android:launchMode=\"%s\"" +
         "\n            android:process=\":jc%1\$d\" />")
         .with { format ->
@@ -112,7 +111,7 @@ def manifestComponents = "" +
             }.collect(Collectors.joining())
         } + ("" +
         "\n        <service " +
-        "\n            android:name=\".main.JessieStubServices\$P%d\"" +
+        "\n            android:name=\".stub.JessieStubServices\$P%d\"" +
         "\n            android:process=\":jc%1\$d\" />")
         .with { format ->
             (0..serviceCount - 1).stream().map {
@@ -120,7 +119,7 @@ def manifestComponents = "" +
             }.collect(Collectors.joining())
         } + ("" +
         "\n        <provider" +
-        "\n            android:name=\".main.JessieStubProviders\$P%d\"" +
+        "\n            android:name=\".stub.JessieStubProviders\$P%d\"" +
         "\n            android:authorities=\"\${applicationId}.jc%1\$d\"" +
         "\n            android:exported=\"false\"" +
         "\n            android:process=\":jc%1\$d\" />")
@@ -135,7 +134,7 @@ task genComponents {
     group 'jessie'
     doLast {
         try {
-            def classDirectory = project.file("src/main/java/cn/jessie/main")
+            def classDirectory = project.file("src/main/java/cn/jessie/stub")
             new File(classDirectory, "JessieStubComponents.kt").write(JessieStubComponents)
             new File(classDirectory, "JessieStubActivities.kt").write(JessieStubActivities)
             new File(classDirectory, "JessieStubServices.kt").write(JessieStubServices)

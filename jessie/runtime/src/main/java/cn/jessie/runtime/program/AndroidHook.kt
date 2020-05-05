@@ -5,6 +5,7 @@ import android.app.Service
 import android.content.ContentProvider
 import cn.jessie.etc.JCLogger
 import cn.jessie.program.DexInfo
+import cn.jessie.program.DexInstaller
 import cn.jessie.runtime.main.MainAppContext
 import java.io.File
 

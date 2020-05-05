@@ -2,8 +2,8 @@ package cn.jessie.runtime.program
 
 import android.content.ComponentName
 import android.content.Intent
-import cn.jessie.app.provider.JessieStubProvider
 import cn.jessie.program.DexInfo
+import cn.jessie.runtime.app.provider.JessieStubProvider
 import cn.jessie.runtime.etc.JCLogger
 import cn.jessie.runtime.main.JessieProgramManagerImpl
 import cn.jessie.runtime.main.MainAppContext

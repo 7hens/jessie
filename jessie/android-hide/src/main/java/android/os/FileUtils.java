@@ -9,7 +9,6 @@ public class FileUtils {
         return setPermissions(path.getAbsolutePath(), mode, uid, gid);
     }
 
-
     public static int setPermissions(String path, int mode, int uid, int gid) {
         return -1;
     }
@@ -17,7 +16,6 @@ public class FileUtils {
     public static int setPermissions(FileDescriptor fd, int mode, int uid, int gid) {
         return -1;
     }
-
 
     public static void copyPermissions(File from, File to) throws IOException {
     }

@@ -6,11 +6,11 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
-import cn.jessie.etc.Init
 import cn.jessie.etc.JCLogger
 import io.reactivex.Observable
 import java.util.*
 import java.util.concurrent.ConcurrentHashMap
+import java.util.concurrent.atomic.AtomicBoolean
 
 @Suppress("unused", "MemberVisibilityCanBePrivate")
 class GlobalBroadcast private constructor(private val context: Context) {
@@ -50,7 +50,7 @@ class GlobalBroadcast private constructor(private val context: Context) {
     }
 
     fun receive(command: String): Observable<String> {
-        if (init.isInitialized()) {
+        if (isInitialized.get()) {
             val record = getCommandRecord()
             return Observable
                     .create<String> { emitter ->
@@ -103,11 +103,12 @@ class GlobalBroadcast private constructor(private val context: Context) {
     companion object {
         @SuppressLint("StaticFieldLeak")
         private lateinit var instance: GlobalBroadcast
-        private val init = Init.create()
+        private val isInitialized = AtomicBoolean(false)
 
         fun initialize(context: Context) {
-            if (init.getElseInitialize()) return
-            instance = GlobalBroadcast(context.applicationContext)
+            if (isInitialized.compareAndSet(false, true)) {
+                instance = GlobalBroadcast(context.applicationContext)
+            }
         }
 
         fun get(): GlobalBroadcast {

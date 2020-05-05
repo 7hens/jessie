@@ -1,5 +1,6 @@
 package cn.jessie.runtime.program
 
+import cn.jessie.program.DexInstaller
 import cn.jessie.program.Program
 import cn.jessie.runtime.etc.Files
 import cn.jessie.runtime.etc.JCLogger

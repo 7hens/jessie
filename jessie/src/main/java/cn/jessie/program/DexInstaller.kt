@@ -11,7 +11,7 @@ import java.util.zip.ZipEntry
 import java.util.zip.ZipFile
 
 @Suppress("SpellCheckingInspection")
-internal object DexInstaller {
+object DexInstaller {
     private const val BASE_DEX = "base.dex"
     private const val LIB_DIR = "lib"
     private const val OAT_DIR = "oat"

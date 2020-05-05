@@ -1,29 +1,16 @@
 package cn.jessie.main
 
 import android.content.ContentProvider
-import android.content.ContentValues
-import android.database.Cursor
-import android.net.Uri
-import cn.jessie.test.JessieTests
+import android.content.ContentProviderWrapper
+import android.content.Context
+import android.content.pm.ProviderInfo
+import cn.jessie.JessieRuntime
 
-class MainInitProvider : ContentProvider() {
-    override fun onCreate(): Boolean {
-        val context = this.context!!
-        MainAppContext.initialize(context)
-        JessieServices.initialize(context)
-//        JessieTests.printClass("android.app.Application")
-//        JessieTests.printClass("android.app.Activity")
-//        JessieTests.printClass("android.webkit.WebView")
-        return true
+class MainInitProvider : ContentProviderWrapper() {
+    override val base: ContentProvider by lazy { JessieRuntime.mainProvider }
+
+    override fun attachInfo(context: Context?, info: ProviderInfo?) {
+        JessieRuntime.initialize(context!!)
+        super.attachInfo(context, info)
     }
-
-    override fun getType(uri: Uri): String? = null
-
-    override fun insert(uri: Uri, values: ContentValues?): Uri? = null
-
-    override fun query(uri: Uri, projection: Array<String>?, selection: String?, selectionArgs: Array<String>?, sortOrder: String?): Cursor? = null
-
-    override fun update(uri: Uri, values: ContentValues?, selection: String?, selectionArgs: Array<String>?): Int = 0
-
-    override fun delete(uri: Uri, selection: String?, selectionArgs: Array<String>?): Int = 0
 }

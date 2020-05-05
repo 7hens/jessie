@@ -2,15 +2,14 @@ package cn.jessie.runtime.program
 
 import android.content.Context
 import android.content.res.Resources
-import cn.jessie.etc.JCLogger
-import cn.jessie.runtime.main.MainAppContext
-import cn.jessie.program.AndroidPackageComponents
 import cn.jessie.program.DexInfo
+import cn.jessie.runtime.etc.JCLogger
+import cn.jessie.runtime.main.MainAppContext
 
 abstract class DexProgram : AbstractProgram() {
 
     override val packageComponents by lazy {
-        AndroidPackageComponents.parse(packageInfo, resources.assets)
+        AndroidPackageComponentsParser.parse(packageInfo, resources.assets)
     }
 
     override val packageInfo by lazy {
