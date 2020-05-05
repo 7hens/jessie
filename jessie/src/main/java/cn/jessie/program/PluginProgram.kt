@@ -18,6 +18,10 @@ internal class PluginProgram(
                 .filter { it.processName == packageInfo.applicationInfo.processName && it.isEnabled }
                 .map { it.name }
                 .getOrElse(0) { "" }
+        if (launcherActivity.isNullOrEmpty()) {
+            JCLogger.warn("There is not a launcher activity in program $packageName")
+            return
+        }
         var intent = Intent().setComponent(ComponentName(packageName, launcherActivity))
         intent = JessieProgramManagerImpl.get().wrapActivityIntent(intent)
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED)
