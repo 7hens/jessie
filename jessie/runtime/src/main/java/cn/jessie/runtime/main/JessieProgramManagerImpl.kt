@@ -5,13 +5,13 @@ import android.content.ComponentName
 import android.content.Intent
 import android.content.pm.*
 import android.os.Build
-import cn.jessie.app.IntentMatcher
-import cn.jessie.app.activity.ActivityStubs
-import cn.jessie.etc.JCLogger
 import cn.jessie.program.AndroidPackageComponents
 import cn.jessie.program.DexInfo
-import cn.jessie.program.PluginManager
 import cn.jessie.program.Program
+import cn.jessie.runtime.app.IntentMatcher
+import cn.jessie.runtime.app.activity.ActivityStubs
+import cn.jessie.runtime.etc.JCLogger
+import cn.jessie.runtime.program.PluginManager
 import java.io.File
 
 internal class JessieProgramManagerImpl private constructor() : IJessieProgramManager {

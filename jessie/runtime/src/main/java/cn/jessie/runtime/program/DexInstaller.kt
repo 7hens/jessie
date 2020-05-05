@@ -1,10 +1,11 @@
 package cn.jessie.runtime.program
 
 import android.os.Build
-import cn.jessie.etc.AndroidVM
-import cn.jessie.etc.FilePermissions
-import cn.jessie.etc.Files
+import cn.jessie.runtime.etc.AndroidVM
+import cn.jessie.runtime.etc.FilePermissions
+import cn.jessie.runtime.etc.Files
 import cn.jessie.etc.JCLogger
+import cn.jessie.program.DexInfo
 import java.io.File
 import java.util.*
 import java.util.zip.ZipEntry

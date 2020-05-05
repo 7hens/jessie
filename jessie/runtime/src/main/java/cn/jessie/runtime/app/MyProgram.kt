@@ -3,9 +3,9 @@ package cn.jessie.runtime.app
 import android.content.pm.PackageInfo
 import android.content.res.Resources
 import cn.jessie.Jessie
+import cn.jessie.program.AndroidPackageComponents
+import cn.jessie.program.DexInfo
 import cn.jessie.runtime.program.AbstractProgram
-import cn.jessie.runtime.program.AndroidPackageComponents
-import cn.jessie.runtime.program.DexInfo
 
 internal object MyProgram : AbstractProgram() {
     private val delegate by lazy {

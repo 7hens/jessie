@@ -2,9 +2,9 @@ package cn.jessie.runtime.test
 
 import android.view.LayoutInflater
 import cn.jessie.etc.JCLogger
-import cn.jessie.etc.Reflections
-import cn.jessie.main.MainAppContext
-import cn.jessie.program.AndroidHook
+import cn.jessie.runtime.etc.Reflections
+import cn.jessie.runtime.main.MainAppContext
+import cn.jessie.runtime.program.AndroidHook
 import java.lang.reflect.Constructor
 import java.util.*
 

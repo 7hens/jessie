@@ -5,12 +5,12 @@ import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.os.Build
 import android.util.SparseArray
-import cn.jessie.etc.JCLogger
-import cn.jessie.etc.NumberPool
-import cn.jessie.main.JessieProgramManagerImpl
-import cn.jessie.main.JessieStubComponents
-import cn.jessie.main.ProcessDispatcher
-import cn.jessie.main.Processes
+import cn.jessie.runtime.etc.JCLogger
+import cn.jessie.runtime.etc.NumberPool
+import cn.jessie.runtime.main.JessieProgramManagerImpl
+import cn.jessie.runtime.main.JessieStubComponents
+import cn.jessie.runtime.main.ProcessDispatcher
+import cn.jessie.runtime.main.Processes
 
 internal object ActivityStubs {
     private val shouldMatchesLaunchMode = "true".toBoolean()

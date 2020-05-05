@@ -3,10 +3,11 @@ package cn.jessie.runtime.program
 import android.content.ComponentName
 import android.content.Intent
 import cn.jessie.app.provider.JessieStubProvider
+import cn.jessie.program.DexInfo
 import cn.jessie.runtime.etc.JCLogger
-import cn.jessie.main.JessieProgramManagerImpl
-import cn.jessie.main.MainAppContext
-import cn.jessie.main.ProcessDispatcher
+import cn.jessie.runtime.main.JessieProgramManagerImpl
+import cn.jessie.runtime.main.MainAppContext
+import cn.jessie.runtime.main.ProcessDispatcher
 
 internal class PluginProgram(
         override val packageName: String,

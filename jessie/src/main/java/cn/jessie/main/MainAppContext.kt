@@ -13,6 +13,7 @@ import java.io.File
  * @author 7hens
  */
 @SuppressLint("WrongConstant", "StaticFieldLeak")
+@Deprecated("jessie-runtime")
 internal object MainAppContext {
     const val JESSIE_HOST_APPLICATION_SERVICE = "jessie_host_application"
     private val init = Init.create()

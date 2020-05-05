@@ -11,8 +11,8 @@ import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.MenuInflater
 import android.view.View
-import cn.jessie.app.application.MyProgramApp
-import cn.jessie.main.JessieServices
+import cn.jessie.runtime.app.application.MyProgramApp
+import cn.jessie.runtime.main.JessieServices
 
 /**
  * @author 7hens

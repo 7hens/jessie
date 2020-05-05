@@ -1,5 +1,7 @@
 package cn.jessie.runtime.program
 
+import cn.jessie.program.Program
+
 abstract class AbstractProgram : Program {
     override fun equals(other: Any?): Boolean {
         return if (other is Program) {

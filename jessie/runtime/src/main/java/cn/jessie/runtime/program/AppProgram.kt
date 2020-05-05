@@ -5,6 +5,8 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageInfo
 import android.content.res.Resources
+import cn.jessie.program.AndroidPackageComponents
+import cn.jessie.program.DexInfo
 import cn.jessie.runtime.main.MainAppContext
 
 /**

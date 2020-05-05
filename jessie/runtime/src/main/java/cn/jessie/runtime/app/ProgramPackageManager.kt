@@ -6,8 +6,8 @@ import android.content.Intent
 import android.content.pm.*
 import android.content.res.XmlResourceParser
 import android.os.Build
-import cn.jessie.main.JessieServices
-import cn.jessie.main.MainAppContext
+import cn.jessie.runtime.main.JessieServices
+import cn.jessie.runtime.main.MainAppContext
 import cn.jessie.program.Program
 
 internal class ProgramPackageManager(base: PackageManager) : PackageManagerWrapper(base) {

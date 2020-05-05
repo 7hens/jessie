@@ -4,7 +4,8 @@ import android.app.Application
 import android.app.Service
 import android.content.ContentProvider
 import cn.jessie.etc.JCLogger
-import cn.jessie.main.MainAppContext
+import cn.jessie.program.DexInfo
+import cn.jessie.runtime.main.MainAppContext
 import java.io.File
 
 internal object AndroidHook {

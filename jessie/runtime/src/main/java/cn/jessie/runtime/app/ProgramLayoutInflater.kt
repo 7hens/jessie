@@ -6,7 +6,7 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewStub
-import cn.jessie.app.activity.JessieStubActivity
+import cn.jessie.runtime.app.activity.JessieStubActivity
 import java.lang.reflect.Constructor
 
 internal class ProgramLayoutInflater(original: LayoutInflater, newContext: Context) : LayoutInflater(original, newContext) {

@@ -4,12 +4,11 @@ import android.content.ContentResolver
 import android.content.Context
 import android.content.IContentProvider
 import android.net.Uri
-import cn.jessie.etc.JCLogger
-import cn.jessie.etc.Reflections
-import cn.jessie.main.JessieServices
-import cn.jessie.main.MainAppContext
-import cn.jessie.main.Processes
-import java.util.*
+import cn.jessie.runtime.etc.JCLogger
+import cn.jessie.runtime.etc.Reflections
+import cn.jessie.runtime.main.JessieServices
+import cn.jessie.runtime.main.MainAppContext
+import cn.jessie.runtime.main.Processes
 
 /**
  * 插件的 ContentResolver

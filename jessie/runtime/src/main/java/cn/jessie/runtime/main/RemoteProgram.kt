@@ -1,8 +1,8 @@
 package cn.jessie.runtime.main
 
 import android.content.pm.PackageInfo
+import cn.jessie.program.DexInfo
 import cn.jessie.runtime.etc.JCLogger
-import cn.jessie.runtime.program.DexInfo
 import cn.jessie.runtime.program.DexProgram
 
 internal class RemoteProgram(override val packageName: String) : DexProgram() {

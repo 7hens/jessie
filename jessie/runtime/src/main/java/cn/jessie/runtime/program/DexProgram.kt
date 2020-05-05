@@ -3,7 +3,9 @@ package cn.jessie.runtime.program
 import android.content.Context
 import android.content.res.Resources
 import cn.jessie.etc.JCLogger
-import cn.jessie.main.MainAppContext
+import cn.jessie.runtime.main.MainAppContext
+import cn.jessie.program.AndroidPackageComponents
+import cn.jessie.program.DexInfo
 
 abstract class DexProgram : AbstractProgram() {
 

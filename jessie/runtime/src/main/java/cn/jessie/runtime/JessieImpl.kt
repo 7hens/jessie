@@ -6,32 +6,33 @@ import android.content.*
 import android.os.Build
 import android.os.Bundle
 import android.os.Process
-import cn.jessie.app.MyProgram
-import cn.jessie.app.provider.ProgramResolver
-import cn.jessie.app.service.ServiceExecutor
-import cn.jessie.main.JessieServices
-import cn.jessie.main.MainAppContext
-import cn.jessie.main.RemoteProgram
-import cn.jessie.program.AppProgram
+import cn.jessie.Jessie
+import cn.jessie.runtime.app.MyProgram
+import cn.jessie.runtime.app.provider.ProgramResolver
+import cn.jessie.runtime.app.service.ServiceExecutor
+import cn.jessie.runtime.main.JessieServices
+import cn.jessie.runtime.main.MainAppContext
+import cn.jessie.runtime.main.RemoteProgram
+import cn.jessie.runtime.program.AppProgram
 import cn.jessie.program.Program
 import java.io.File
 
 /**
  * @author 7hens
  */
-object Jessie {
+object JessieImpl : Jessie {
 
     private val programManager get() = JessieServices.programManager
 
     private val programsInternal = hashMapOf<String, Program>()
 
-    val hostProgram: Program by lazy {
+    override val hostProgram: Program by lazy {
         AppProgram(MainAppContext.get())
     }
 
-    val currentProgram: Program = MyProgram
+    override val currentProgram: Program = MyProgram
 
-    val programs: Map<String, Program>
+    override val programs: Map<String, Program>
         get() {
             // FIXME 删除后需要刷新
             val remoteProgramPackageNames = programManager.getProgramPackageNames()
@@ -44,24 +45,24 @@ object Jessie {
             return programsInternal
         }
 
-    fun getProgram(packageName: String): Program? {
+    override fun getProgram(packageName: String): Program? {
         return programs[packageName]
     }
 
-    fun containsProgram(packageName: String): Boolean {
+    override fun containsProgram(packageName: String): Boolean {
         return programManager.containsProgram(packageName)
     }
 
-    fun install(apk: File): Program {
+    override fun install(apk: File): Program {
         val packageName = programManager.install(apk.path)
         return RemoteProgram(packageName)
     }
 
-    fun uninstall(program: String): Boolean {
+    override fun uninstall(program: String): Boolean {
         return programManager.uninstall(program)
     }
 
-    val currentProgramProcessName: String by lazy {
+    override val currentProgramProcessName: String by lazy {
         programManager.getProgramProcessNameByPid(Process.myPid())
     }
 
@@ -69,41 +70,41 @@ object Jessie {
         return programManager.wrapActivityIntent(intent)
     }
 
-    fun startActivity(context: Context, intent: Intent) {
+    override fun startActivity(context: Context, intent: Intent) {
         context.startActivity(wrapActivityIntent(intent))
     }
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
-    fun startActivity(context: Context, intent: Intent, options: Bundle?) {
+    override fun startActivity(context: Context, intent: Intent, options: Bundle?) {
         context.startActivity(wrapActivityIntent(intent), options)
     }
 
-    fun startActivityForResult(context: Activity, intent: Intent, requestCode: Int) {
+    override fun startActivityForResult(context: Activity, intent: Intent, requestCode: Int) {
         context.startActivityForResult(wrapActivityIntent(intent), requestCode)
     }
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
-    fun startActivityForResult(context: Activity, intent: Intent, requestCode: Int, options: Bundle?) {
+    override fun startActivityForResult(context: Activity, intent: Intent, requestCode: Int, options: Bundle?) {
         context.startActivityForResult(wrapActivityIntent(intent), requestCode, options)
     }
 
-    fun startService(context: Context, intent: Intent): ComponentName? {
+    override fun startService(context: Context, intent: Intent): ComponentName? {
         return ServiceExecutor.startService(intent)
     }
 
-    fun stopService(context: Context, intent: Intent): Boolean {
+    override fun stopService(context: Context, intent: Intent): Boolean {
         return ServiceExecutor.stopService(intent)
     }
 
-    fun bindService(context: Context, intent: Intent, conn: ServiceConnection, flags: Int): Boolean {
+    override fun bindService(context: Context, intent: Intent, conn: ServiceConnection, flags: Int): Boolean {
         return ServiceExecutor.bindService(intent, conn, flags)
     }
 
-    fun unbindService(context: Context, conn: ServiceConnection) {
+    override fun unbindService(context: Context, conn: ServiceConnection) {
         ServiceExecutor.unbindService(conn)
     }
 
-    fun getContentResolver(context: Context): ContentResolver {
+    override fun getContentResolver(context: Context): ContentResolver {
         return ProgramResolver.get()
     }
 }

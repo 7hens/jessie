@@ -6,12 +6,12 @@ import android.content.ServiceConnection
 import android.content.pm.ServiceInfo
 import android.os.Build
 import android.os.IBinder
-import cn.jessie.app.provider.JessieStubProvider
-import cn.jessie.etc.BinderCursor
-import cn.jessie.etc.JCLogger
-import cn.jessie.main.JessieServices
-import cn.jessie.main.MainAppContext
-import cn.jessie.main.Processes
+import cn.jessie.runtime.app.provider.JessieStubProvider
+import cn.jessie.runtime.etc.BinderCursor
+import cn.jessie.runtime.etc.JCLogger
+import cn.jessie.runtime.main.JessieServices
+import cn.jessie.runtime.main.MainAppContext
+import cn.jessie.runtime.main.Processes
 import cn.thens.okbinder.OkBinder
 import java.util.concurrent.ConcurrentHashMap
 

@@ -5,7 +5,7 @@ import android.content.Intent
 import android.content.pm.PackageInfo
 import android.content.pm.ProviderInfo
 import android.content.pm.ResolveInfo
-import cn.jessie.runtime.program.DexInfo
+import cn.jessie.program.DexInfo
 import cn.thens.okbinder.OkBinder
 
 @OkBinder.Interface

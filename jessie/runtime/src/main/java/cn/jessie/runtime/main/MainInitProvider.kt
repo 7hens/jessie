@@ -4,7 +4,7 @@ import android.content.ContentProvider
 import android.content.ContentValues
 import android.database.Cursor
 import android.net.Uri
-import cn.jessie.test.JessieTests
+import cn.jessie.runtime.test.JessieTests
 
 class MainInitProvider : ContentProvider() {
     override fun onCreate(): Boolean {

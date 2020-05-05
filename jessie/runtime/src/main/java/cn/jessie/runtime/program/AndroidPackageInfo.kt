@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
 import android.os.Build
+import cn.jessie.program.DexInfo
 import cn.jessie.runtime.etc.Files
 import cn.jessie.runtime.main.MainAppContext
 import java.io.File
