@@ -32,7 +32,7 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     compileOnly project(':jessie:android-hide')
     implementation 'com.github.7hens:okbinder:1.0'
     implementation 'cn.thens:okparcelable:0.1.0'
