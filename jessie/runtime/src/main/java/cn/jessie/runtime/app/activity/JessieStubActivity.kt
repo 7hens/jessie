@@ -37,6 +37,7 @@ import java.lang.reflect.Modifier
 class JessieStubActivity : Activity() {
     internal lateinit var programActivity: Activity
     private lateinit var programActivityInfo: ActivityInfo
+    private var baseActivity: Activity? = null
     private val program: Program = MyProgram
     private val programManager get() = JessieServices.programManager
     private val runOnReady = RunOnReady()
@@ -100,8 +101,17 @@ class JessieStubActivity : Activity() {
 
     private val isInitialized: Boolean get() = ::programActivity.isInitialized
 
+    override fun attachBaseContext(newBase: Context?) {
+        super.attachBaseContext(newBase)
+        baseActivity = newBase as? Activity
+    }
+
     override fun getTheme(): Resources.Theme {
-        return if (isInitialized) programActivity.theme else super.getTheme()
+        return if (isInitialized) {
+            programActivity.theme
+        } else {
+            baseActivity?.theme ?: MainAppContext.get().theme
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -23,893 +23,901 @@ import java.io.FileDescriptor
 import java.io.PrintWriter
 import java.util.function.Consumer
 
-@SuppressLint("MissingPermission", "NewApi")
+@SuppressLint("MissingPermission", "NewApi", "MissingSuperCall")
 abstract class ActivityWrapper : Activity() {
-    abstract val base: Activity
+    abstract val baseActivity: Activity
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
-        return base.onKeyDown(keyCode, event)
+        return baseActivity.onKeyDown(keyCode, event)
     }
 
     override fun onContextItemSelected(item: MenuItem): Boolean {
-        return base.onContextItemSelected(item)
+        return baseActivity.onContextItemSelected(item)
     }
 
     override fun setExitSharedElementCallback(callback: SharedElementCallback?) {
-        base.setExitSharedElementCallback(callback)
+        baseActivity.setExitSharedElementCallback(callback)
     }
 
     override fun onAttachedToWindow() {
-        base.onAttachedToWindow()
+        baseActivity.onAttachedToWindow()
     }
 
     override fun startNextMatchingActivity(intent: Intent): Boolean {
-        return base.startNextMatchingActivity(intent)
+        return baseActivity.startNextMatchingActivity(intent)
     }
 
     override fun startNextMatchingActivity(intent: Intent, options: Bundle?): Boolean {
-        return base.startNextMatchingActivity(intent, options)
+        return baseActivity.startNextMatchingActivity(intent, options)
     }
 
     override fun <T : View?> findViewById(id: Int): T {
-        return base.findViewById<T>(id)
+        return baseActivity.findViewById<T>(id)
     }
 
     override fun startIntentSenderForResult(intent: IntentSender?, requestCode: Int, fillInIntent: Intent?, flagsMask: Int, flagsValues: Int, extraFlags: Int) {
-        base.startIntentSenderForResult(intent, requestCode, fillInIntent, flagsMask, flagsValues, extraFlags)
+        baseActivity.startIntentSenderForResult(intent, requestCode, fillInIntent, flagsMask, flagsValues, extraFlags)
     }
 
     override fun startIntentSenderForResult(intent: IntentSender?, requestCode: Int, fillInIntent: Intent?, flagsMask: Int, flagsValues: Int, extraFlags: Int, options: Bundle?) {
-        base.startIntentSenderForResult(intent, requestCode, fillInIntent, flagsMask, flagsValues, extraFlags, options)
+        baseActivity.startIntentSenderForResult(intent, requestCode, fillInIntent, flagsMask, flagsValues, extraFlags, options)
     }
 
     override fun hasWindowFocus(): Boolean {
-        return base.hasWindowFocus()
+        return baseActivity.hasWindowFocus()
     }
 
     override fun setPictureInPictureParams(params: PictureInPictureParams) {
-        base.setPictureInPictureParams(params)
+        baseActivity.setPictureInPictureParams(params)
     }
 
     override fun isImmersive(): Boolean {
-        return base.isImmersive()
+        return baseActivity.isImmersive()
     }
 
     override fun isVoiceInteraction(): Boolean {
-        return base.isVoiceInteraction()
+        return baseActivity.isVoiceInteraction()
     }
 
     override fun onProvideAssistData(data: Bundle?) {
-        base.onProvideAssistData(data)
+        baseActivity.onProvideAssistData(data)
     }
 
     override fun registerActivityLifecycleCallbacks(callback: Application.ActivityLifecycleCallbacks) {
-        base.registerActivityLifecycleCallbacks(callback)
+        baseActivity.registerActivityLifecycleCallbacks(callback)
     }
 
     override fun onPause() {
         super.onPause()
-        base.onPause()
+        baseActivity.onPause()
     }
 
     override fun getMenuInflater(): MenuInflater {
-        return base.getMenuInflater()
+        return baseActivity.getMenuInflater()
     }
 
     override fun onTouchEvent(event: MotionEvent?): Boolean {
-        return base.onTouchEvent(event)
+        return baseActivity.onTouchEvent(event)
     }
 
     override fun takeKeyEvents(get: Boolean) {
-        base.takeKeyEvents(get)
+        baseActivity.takeKeyEvents(get)
     }
 
     override fun onPreparePanel(featureId: Int, view: View?, menu: Menu): Boolean {
-        return base.onPreparePanel(featureId, view, menu)
+        return baseActivity.onPreparePanel(featureId, view, menu)
     }
 
     override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
-        return base.onPrepareOptionsMenu(menu)
+        return baseActivity.onPrepareOptionsMenu(menu)
     }
 
     override fun setEnterSharedElementCallback(callback: SharedElementCallback?) {
-        base.setEnterSharedElementCallback(callback)
+        baseActivity.setEnterSharedElementCallback(callback)
     }
 
     override fun startActivityFromFragment(fragment: Fragment, intent: Intent?, requestCode: Int) {
-        base.startActivityFromFragment(fragment, intent, requestCode)
+        baseActivity.startActivityFromFragment(fragment, intent, requestCode)
     }
 
     override fun startActivityFromFragment(fragment: Fragment, intent: Intent?, requestCode: Int, options: Bundle?) {
-        base.startActivityFromFragment(fragment, intent, requestCode, options)
+        baseActivity.startActivityFromFragment(fragment, intent, requestCode, options)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        base.onActivityResult(requestCode, resultCode, data)
+        baseActivity.onActivityResult(requestCode, resultCode, data)
     }
 
     override fun onActionModeFinished(mode: ActionMode?) {
         super.onActionModeFinished(mode)
-        base.onActionModeFinished(mode)
+        baseActivity.onActionModeFinished(mode)
     }
 
     override fun getLayoutInflater(): LayoutInflater {
-        return base.getLayoutInflater()
+        return baseActivity.getLayoutInflater()
     }
 
     override fun onMultiWindowModeChanged(isInMultiWindowMode: Boolean, newConfig: Configuration?) {
-        base.onMultiWindowModeChanged(isInMultiWindowMode, newConfig)
+        baseActivity.onMultiWindowModeChanged(isInMultiWindowMode, newConfig)
     }
 
     override fun onMultiWindowModeChanged(isInMultiWindowMode: Boolean) {
-        base.onMultiWindowModeChanged(isInMultiWindowMode)
+        baseActivity.onMultiWindowModeChanged(isInMultiWindowMode)
     }
 
     override fun getLastNonConfigurationInstance(): Any? {
-        return base.getLastNonConfigurationInstance()
+        return baseActivity.getLastNonConfigurationInstance()
     }
 
     override fun onEnterAnimationComplete() {
-        base.onEnterAnimationComplete()
+        baseActivity.onEnterAnimationComplete()
     }
 
     override fun onKeyShortcut(keyCode: Int, event: KeyEvent?): Boolean {
-        return base.onKeyShortcut(keyCode, event)
+        return baseActivity.onKeyShortcut(keyCode, event)
     }
 
     override fun setInheritShowWhenLocked(inheritShowWhenLocked: Boolean) {
-        base.setInheritShowWhenLocked(inheritShowWhenLocked)
+        baseActivity.setInheritShowWhenLocked(inheritShowWhenLocked)
     }
 
     override fun dispatchKeyShortcutEvent(event: KeyEvent?): Boolean {
-        return base.dispatchKeyShortcutEvent(event)
+        return baseActivity.dispatchKeyShortcutEvent(event)
     }
 
     override fun unregisterActivityLifecycleCallbacks(callback: Application.ActivityLifecycleCallbacks) {
-        base.unregisterActivityLifecycleCallbacks(callback)
+        baseActivity.unregisterActivityLifecycleCallbacks(callback)
     }
 
     override fun setShowWhenLocked(showWhenLocked: Boolean) {
-        base.setShowWhenLocked(showWhenLocked)
+        baseActivity.setShowWhenLocked(showWhenLocked)
     }
 
     override fun onCreateNavigateUpTaskStack(builder: TaskStackBuilder?) {
-        base.onCreateNavigateUpTaskStack(builder)
+        baseActivity.onCreateNavigateUpTaskStack(builder)
     }
 
     override fun registerForContextMenu(view: View?) {
-        base.registerForContextMenu(view)
+        baseActivity.registerForContextMenu(view)
     }
 
     override fun getTaskId(): Int {
-        return base.getTaskId()
+        return baseActivity.getTaskId()
     }
 
     override fun onContextMenuClosed(menu: Menu) {
-        base.onContextMenuClosed(menu)
+        baseActivity.onContextMenuClosed(menu)
     }
 
     override fun getCallingActivity(): ComponentName? {
-        return base.getCallingActivity()
+        return baseActivity.getCallingActivity()
     }
 
     override fun onNavigateUp(): Boolean {
-        return base.onNavigateUp()
+        return baseActivity.onNavigateUp()
     }
 
     override fun postponeEnterTransition() {
-        base.postponeEnterTransition()
+        baseActivity.postponeEnterTransition()
     }
 
     override fun onPerformDirectAction(actionId: String, arguments: Bundle, cancellationSignal: CancellationSignal, resultListener: Consumer<Bundle>) {
-        base.onPerformDirectAction(actionId, arguments, cancellationSignal, resultListener)
+        baseActivity.onPerformDirectAction(actionId, arguments, cancellationSignal, resultListener)
     }
 
     override fun onCreateDescription(): CharSequence? {
-        return base.onCreateDescription()
+        return baseActivity.onCreateDescription()
     }
 
     override fun isTaskRoot(): Boolean {
-        return base.isTaskRoot()
+        return baseActivity.isTaskRoot()
     }
 
     override fun onPostResume() {
         super.onPostResume()
-        base.onPostResume()
+        baseActivity.onPostResume()
     }
 
     override fun stopManagingCursor(c: Cursor?) {
-        base.stopManagingCursor(c)
+        baseActivity.stopManagingCursor(c)
     }
 
     override fun getMaxNumPictureInPictureActions(): Int {
-        return base.getMaxNumPictureInPictureActions()
+        return baseActivity.getMaxNumPictureInPictureActions()
     }
 
     override fun addContentView(view: View?, params: ViewGroup.LayoutParams?) {
-        base.addContentView(view, params)
+        baseActivity.addContentView(view, params)
     }
 
     override fun shouldShowRequestPermissionRationale(permission: String): Boolean {
-        return base.shouldShowRequestPermissionRationale(permission)
+        return baseActivity.shouldShowRequestPermissionRationale(permission)
     }
 
     override fun triggerSearch(query: String?, appSearchData: Bundle?) {
-        base.triggerSearch(query, appSearchData)
+        baseActivity.triggerSearch(query, appSearchData)
     }
 
     override fun setTaskDescription(taskDescription: ActivityManager.TaskDescription?) {
-        base.setTaskDescription(taskDescription)
+        baseActivity.setTaskDescription(taskDescription)
     }
 
     override fun isLocalVoiceInteractionSupported(): Boolean {
-        return base.isLocalVoiceInteractionSupported()
+        return baseActivity.isLocalVoiceInteractionSupported()
     }
 
     override fun onTrimMemory(level: Int) {
-        base.onTrimMemory(level)
+        baseActivity.onTrimMemory(level)
     }
 
     override fun startLockTask() {
-        base.startLockTask()
+        baseActivity.startLockTask()
     }
 
     override fun setTurnScreenOn(turnScreenOn: Boolean) {
-        base.setTurnScreenOn(turnScreenOn)
+        baseActivity.setTurnScreenOn(turnScreenOn)
     }
 
     override fun onProvideKeyboardShortcuts(data: MutableList<KeyboardShortcutGroup>?, menu: Menu?, deviceId: Int) {
-        base.onProvideKeyboardShortcuts(data, menu, deviceId)
+        baseActivity.onProvideKeyboardShortcuts(data, menu, deviceId)
     }
 
     override fun setContentTransitionManager(tm: TransitionManager?) {
-        base.setContentTransitionManager(tm)
+        baseActivity.setContentTransitionManager(tm)
     }
 
     override fun onAttachFragment(fragment: Fragment?) {
-        base.onAttachFragment(fragment)
+        baseActivity.onAttachFragment(fragment)
     }
 
     override fun setVisible(visible: Boolean) {
-        base.setVisible(visible)
+        baseActivity.setVisible(visible)
     }
 
     override fun isChangingConfigurations(): Boolean {
-        return base.isChangingConfigurations()
+        return baseActivity.isChangingConfigurations()
     }
 
     override fun finishActivity(requestCode: Int) {
-        base.finishActivity(requestCode)
+        baseActivity.finishActivity(requestCode)
     }
 
     override fun onActionModeStarted(mode: ActionMode?) {
         super.onActionModeStarted(mode)
-        base.onActionModeStarted(mode)
+        baseActivity.onActionModeStarted(mode)
     }
 
     override fun isInMultiWindowMode(): Boolean {
-        return base.isInMultiWindowMode()
+        return baseActivity.isInMultiWindowMode()
     }
 
     override fun onTopResumedActivityChanged(isTopResumedActivity: Boolean) {
-        base.onTopResumedActivityChanged(isTopResumedActivity)
+        baseActivity.onTopResumedActivityChanged(isTopResumedActivity)
     }
 
     override fun setTitleColor(textColor: Int) {
-        base.setTitleColor(textColor)
+        baseActivity.setTitleColor(textColor)
     }
 
     override fun startActionMode(callback: ActionMode.Callback?): ActionMode? {
-        return base.startActionMode(callback)
+        return baseActivity.startActionMode(callback)
     }
 
     override fun startActionMode(callback: ActionMode.Callback?, type: Int): ActionMode? {
-        return base.startActionMode(callback, type)
+        return baseActivity.startActionMode(callback, type)
     }
 
     override fun setContentView(layoutResID: Int) {
-        base.setContentView(layoutResID)
+        baseActivity.setContentView(layoutResID)
     }
 
     override fun setContentView(view: View?) {
-        base.setContentView(view)
+        baseActivity.setContentView(view)
     }
 
     override fun setContentView(view: View?, params: ViewGroup.LayoutParams?) {
-        base.setContentView(view, params)
+        baseActivity.setContentView(view, params)
     }
 
     override fun stopLockTask() {
-        base.stopLockTask()
+        baseActivity.stopLockTask()
     }
 
     override fun onUserInteraction() {
-        base.onUserInteraction()
+        baseActivity.onUserInteraction()
     }
 
     override fun setImmersive(i: Boolean) {
-        base.setImmersive(i)
+        baseActivity.setImmersive(i)
     }
 
     override fun getChangingConfigurations(): Int {
-        return base.getChangingConfigurations()
+        return baseActivity.getChangingConfigurations()
     }
 
     override fun onKeyMultiple(keyCode: Int, repeatCount: Int, event: KeyEvent?): Boolean {
-        return base.onKeyMultiple(keyCode, repeatCount, event)
+        return baseActivity.onKeyMultiple(keyCode, repeatCount, event)
     }
 
     override fun shouldUpRecreateTask(targetIntent: Intent?): Boolean {
-        return base.shouldUpRecreateTask(targetIntent)
+        return baseActivity.shouldUpRecreateTask(targetIntent)
     }
 
     override fun navigateUpTo(upIntent: Intent?): Boolean {
-        return base.navigateUpTo(upIntent)
+        return baseActivity.navigateUpTo(upIntent)
     }
 
     override fun onMenuOpened(featureId: Int, menu: Menu): Boolean {
-        return base.onMenuOpened(featureId, menu)
+        return baseActivity.onMenuOpened(featureId, menu)
     }
 
     override fun onPanelClosed(featureId: Int, menu: Menu) {
-        base.onPanelClosed(featureId, menu)
+        baseActivity.onPanelClosed(featureId, menu)
     }
 
     override fun isInPictureInPictureMode(): Boolean {
-        return base.isInPictureInPictureMode()
+        return baseActivity.isInPictureInPictureMode()
     }
 
     override fun finish() {
-        base.finish()
+        baseActivity.finish()
     }
 
     override fun finishAffinity() {
-        base.finishAffinity()
+        baseActivity.finishAffinity()
     }
 
     override fun onCreateDialog(id: Int): Dialog {
-        return base.onCreateDialog(id)
+        return baseActivity.onCreateDialog(id)
     }
 
     override fun onCreateDialog(id: Int, args: Bundle?): Dialog? {
-        return base.onCreateDialog(id, args)
+        return baseActivity.onCreateDialog(id, args)
     }
 
     override fun startActivityFromChild(child: Activity, intent: Intent?, requestCode: Int) {
-        base.startActivityFromChild(child, intent, requestCode)
+        baseActivity.startActivityFromChild(child, intent, requestCode)
     }
 
     override fun startActivityFromChild(child: Activity, intent: Intent?, requestCode: Int, options: Bundle?) {
-        base.startActivityFromChild(child, intent, requestCode, options)
+        baseActivity.startActivityFromChild(child, intent, requestCode, options)
     }
 
     override fun enterPictureInPictureMode() {
-        base.enterPictureInPictureMode()
+        baseActivity.enterPictureInPictureMode()
     }
 
     override fun enterPictureInPictureMode(params: PictureInPictureParams): Boolean {
-        return base.enterPictureInPictureMode(params)
+        return baseActivity.enterPictureInPictureMode(params)
     }
 
     override fun finishFromChild(child: Activity?) {
-        base.finishFromChild(child)
+        baseActivity.finishFromChild(child)
     }
 
     override fun onWindowFocusChanged(hasFocus: Boolean) {
-        base.onWindowFocusChanged(hasFocus)
+        baseActivity.onWindowFocusChanged(hasFocus)
     }
 
     override fun moveTaskToBack(nonRoot: Boolean): Boolean {
-        return base.moveTaskToBack(nonRoot)
+        return baseActivity.moveTaskToBack(nonRoot)
     }
 
     override fun finishActivityFromChild(child: Activity, requestCode: Int) {
-        base.finishActivityFromChild(child, requestCode)
+        baseActivity.finishActivityFromChild(child, requestCode)
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        base.onDestroy()
+        baseActivity.onDestroy()
     }
 
     override fun getActionBar(): ActionBar? {
-        return base.getActionBar()
+        return baseActivity.getActionBar()
     }
 
     override fun onCreateContextMenu(menu: ContextMenu?, v: View?, menuInfo: ContextMenu.ContextMenuInfo?) {
-        base.onCreateContextMenu(menu, v, menuInfo)
+        baseActivity.onCreateContextMenu(menu, v, menuInfo)
     }
 
     override fun getContentTransitionManager(): TransitionManager {
-        return base.getContentTransitionManager()
+        return baseActivity.getContentTransitionManager()
     }
 
     override fun onActivityReenter(resultCode: Int, data: Intent?) {
-        base.onActivityReenter(resultCode, data)
+        baseActivity.onActivityReenter(resultCode, data)
     }
 
     override fun onKeyLongPress(keyCode: Int, event: KeyEvent?): Boolean {
-        return base.onKeyLongPress(keyCode, event)
+        return baseActivity.onKeyLongPress(keyCode, event)
     }
 
     override fun onBackPressed() {
-        base.onBackPressed()
+        baseActivity.onBackPressed()
     }
 
     override fun onLocalVoiceInteractionStopped() {
-        base.onLocalVoiceInteractionStopped()
+        baseActivity.onLocalVoiceInteractionStopped()
     }
 
     override fun onConfigurationChanged(newConfig: Configuration) {
-        base.onConfigurationChanged(newConfig)
+        baseActivity.onConfigurationChanged(newConfig)
     }
 
     override fun navigateUpToFromChild(child: Activity?, upIntent: Intent?): Boolean {
-        return base.navigateUpToFromChild(child, upIntent)
+        return baseActivity.navigateUpToFromChild(child, upIntent)
     }
 
     override fun setActionBar(toolbar: Toolbar?) {
-        base.setActionBar(toolbar)
+        baseActivity.setActionBar(toolbar)
     }
 
     override fun onVisibleBehindCanceled() {
         super.onVisibleBehindCanceled()
-        base.onVisibleBehindCanceled()
+        baseActivity.onVisibleBehindCanceled()
     }
 
     override fun openContextMenu(view: View?) {
-        base.openContextMenu(view)
+        baseActivity.openContextMenu(view)
     }
 
     override fun getParentActivityIntent(): Intent? {
-        return base.getParentActivityIntent()
+        return baseActivity.getParentActivityIntent()
     }
 
     override fun startIntentSender(intent: IntentSender?, fillInIntent: Intent?, flagsMask: Int, flagsValues: Int, extraFlags: Int) {
-        base.startIntentSender(intent, fillInIntent, flagsMask, flagsValues, extraFlags)
+        baseActivity.startIntentSender(intent, fillInIntent, flagsMask, flagsValues, extraFlags)
     }
 
     override fun startIntentSender(intent: IntentSender?, fillInIntent: Intent?, flagsMask: Int, flagsValues: Int, extraFlags: Int, options: Bundle?) {
-        base.startIntentSender(intent, fillInIntent, flagsMask, flagsValues, extraFlags, options)
+        baseActivity.startIntentSender(intent, fillInIntent, flagsMask, flagsValues, extraFlags, options)
     }
 
     override fun closeContextMenu() {
-        base.closeContextMenu()
+        baseActivity.closeContextMenu()
     }
 
     override fun onPrepareDialog(id: Int, dialog: Dialog?) {
-        base.onPrepareDialog(id, dialog)
+        baseActivity.onPrepareDialog(id, dialog)
     }
 
     override fun onPrepareDialog(id: Int, dialog: Dialog?, args: Bundle?) {
-        base.onPrepareDialog(id, dialog, args)
+        baseActivity.onPrepareDialog(id, dialog, args)
     }
 
     override fun onNewIntent(intent: Intent?) {
-        base.onNewIntent(intent)
+        baseActivity.onNewIntent(intent)
     }
 
     override fun getRequestedOrientation(): Int {
-        return base.getRequestedOrientation()
+        return baseActivity.getRequestedOrientation()
     }
 
     override fun getVoiceInteractor(): VoiceInteractor {
-        return base.getVoiceInteractor()
+        return baseActivity.getVoiceInteractor()
     }
 
     override fun dump(prefix: String, fd: FileDescriptor?, writer: PrintWriter, args: Array<String>?) {
-        base.dump(prefix, fd, writer, args)
+        baseActivity.dump(prefix, fd, writer, args)
     }
 
     override fun onContentChanged() {
-        base.onContentChanged()
+        baseActivity.onContentChanged()
     }
 
     override fun releaseInstance(): Boolean {
-        return base.releaseInstance()
+        return baseActivity.releaseInstance()
     }
 
     override fun onSearchRequested(searchEvent: SearchEvent?): Boolean {
-        return base.onSearchRequested(searchEvent)
+        return baseActivity.onSearchRequested(searchEvent)
     }
 
     override fun onSearchRequested(): Boolean {
-        return base.onSearchRequested()
+        return baseActivity.onSearchRequested()
     }
 
     override fun onNavigateUpFromChild(child: Activity?): Boolean {
-        return base.onNavigateUpFromChild(child)
+        return baseActivity.onNavigateUpFromChild(child)
     }
 
     override fun getReferrer(): Uri? {
-        return base.getReferrer()
+        return baseActivity.getReferrer()
     }
 
     override fun startLocalVoiceInteraction(privateOptions: Bundle?) {
-        base.startLocalVoiceInteraction(privateOptions)
+        baseActivity.startLocalVoiceInteraction(privateOptions)
     }
 
     override fun setRequestedOrientation(requestedOrientation: Int) {
-        base.setRequestedOrientation(requestedOrientation)
+        baseActivity.setRequestedOrientation(requestedOrientation)
     }
 
     override fun dispatchPopulateAccessibilityEvent(event: AccessibilityEvent?): Boolean {
-        return base.dispatchPopulateAccessibilityEvent(event)
+        return baseActivity.dispatchPopulateAccessibilityEvent(event)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        ReflectionUtils.copyFields(Activity::class.java, this, base)
-        base.onCreate(savedInstanceState)
+        ReflectionUtils.copyFields(Activity::class.java, this, baseActivity)
+        baseActivity.onCreate(savedInstanceState)
     }
 
     override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
-        base.onCreate(savedInstanceState, persistentState)
+        baseActivity.onCreate(savedInstanceState, persistentState)
     }
 
     override fun onLowMemory() {
-        base.onLowMemory()
+        baseActivity.onLowMemory()
     }
 
     override fun reportFullyDrawn() {
-        base.reportFullyDrawn()
+        baseActivity.reportFullyDrawn()
     }
 
     override fun onRetainNonConfigurationInstance(): Any {
-        return base.onRetainNonConfigurationInstance()
+        return baseActivity.onRetainNonConfigurationInstance()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        return base.onCreateOptionsMenu(menu)
+        return baseActivity.onCreateOptionsMenu(menu)
     }
 
     override fun startPostponedEnterTransition() {
-        base.startPostponedEnterTransition()
+        baseActivity.startPostponedEnterTransition()
     }
 
     override fun getLoaderManager(): LoaderManager {
-        return base.getLoaderManager()
+        return baseActivity.getLoaderManager()
     }
 
     override fun isActivityTransitionRunning(): Boolean {
-        return base.isActivityTransitionRunning()
+        return baseActivity.isActivityTransitionRunning()
     }
 
     override fun onStart() {
         super.onStart()
-        base.onStart()
+        baseActivity.onStart()
     }
 
     override fun unregisterForContextMenu(view: View?) {
-        base.unregisterForContextMenu(view)
+        baseActivity.unregisterForContextMenu(view)
     }
 
     override fun overridePendingTransition(enterAnim: Int, exitAnim: Int) {
-        base.overridePendingTransition(enterAnim, exitAnim)
+        baseActivity.overridePendingTransition(enterAnim, exitAnim)
     }
 
     override fun onGenericMotionEvent(event: MotionEvent?): Boolean {
-        return base.onGenericMotionEvent(event)
+        return baseActivity.onGenericMotionEvent(event)
     }
 
     override fun onProvideAssistContent(outContent: AssistContent?) {
-        base.onProvideAssistContent(outContent)
+        baseActivity.onProvideAssistContent(outContent)
     }
 
     override fun stopLocalVoiceInteraction() {
-        base.stopLocalVoiceInteraction()
+        baseActivity.stopLocalVoiceInteraction()
     }
 
     override fun recreate() {
-        base.recreate()
+        baseActivity.recreate()
     }
 
     override fun onOptionsMenuClosed(menu: Menu?) {
-        base.onOptionsMenuClosed(menu)
+        baseActivity.onOptionsMenuClosed(menu)
     }
 
     override fun createPendingResult(requestCode: Int, data: Intent, flags: Int): PendingIntent {
-        return base.createPendingResult(requestCode, data, flags)
+        return baseActivity.createPendingResult(requestCode, data, flags)
     }
 
     override fun onWindowAttributesChanged(params: WindowManager.LayoutParams?) {
-        base.onWindowAttributesChanged(params)
+        baseActivity.onWindowAttributesChanged(params)
     }
 
     override fun startActivities(intents: Array<out Intent>?) {
-        base.startActivities(intents)
+        baseActivity.startActivities(intents)
     }
 
     override fun startActivities(intents: Array<out Intent>?, options: Bundle?) {
-        base.startActivities(intents, options)
+        baseActivity.startActivities(intents, options)
     }
 
     override fun onUserLeaveHint() {
-        base.onUserLeaveHint()
+        baseActivity.onUserLeaveHint()
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
-        base.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        baseActivity.onRequestPermissionsResult(requestCode, permissions, grantResults)
     }
 
     override fun startManagingCursor(c: Cursor?) {
-        base.startManagingCursor(c)
+        baseActivity.startManagingCursor(c)
     }
 
     override fun onResume() {
         super.onResume()
-        base.onResume()
+        baseActivity.onResume()
     }
 
     override fun onTitleChanged(title: CharSequence?, color: Int) {
-        base.onTitleChanged(title, color)
+        baseActivity.onTitleChanged(title, color)
     }
 
     override fun onProvideReferrer(): Uri {
-        return base.onProvideReferrer()
+        return baseActivity.onProvideReferrer()
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
-        base.onSaveInstanceState(outState)
+        baseActivity.onSaveInstanceState(outState)
     }
 
     override fun onSaveInstanceState(outState: Bundle, outPersistentState: PersistableBundle) {
-        base.onSaveInstanceState(outState, outPersistentState)
+        baseActivity.onSaveInstanceState(outState, outPersistentState)
     }
 
     override fun onChildTitleChanged(childActivity: Activity?, title: CharSequence?) {
-        base.onChildTitleChanged(childActivity, title)
+        baseActivity.onChildTitleChanged(childActivity, title)
     }
 
     override fun onStateNotSaved() {
-        base.onStateNotSaved()
+        baseActivity.onStateNotSaved()
     }
 
     override fun dispatchGenericMotionEvent(ev: MotionEvent?): Boolean {
-        return base.dispatchGenericMotionEvent(ev)
+        return baseActivity.dispatchGenericMotionEvent(ev)
     }
 
     override fun openOptionsMenu() {
-        base.openOptionsMenu()
+        baseActivity.openOptionsMenu()
     }
 
     override fun dispatchTrackballEvent(ev: MotionEvent?): Boolean {
-        return base.dispatchTrackballEvent(ev)
+        return baseActivity.dispatchTrackballEvent(ev)
     }
 
     override fun setTitle(title: CharSequence?) {
-        base.setTitle(title)
+        baseActivity.setTitle(title)
     }
 
     override fun setTitle(titleId: Int) {
-        base.setTitle(titleId)
+        baseActivity.setTitle(titleId)
     }
 
     override fun isVoiceInteractionRoot(): Boolean {
-        return base.isVoiceInteractionRoot()
+        return baseActivity.isVoiceInteractionRoot()
     }
 
     override fun startActivity(intent: Intent?) {
-        base.startActivity(intent)
+        baseActivity.startActivity(intent)
     }
 
     override fun startActivity(intent: Intent?, options: Bundle?) {
-        base.startActivity(intent, options)
+        baseActivity.startActivity(intent, options)
     }
 
     override fun onCreateView(name: String, context: Context, attrs: AttributeSet): View? {
-        return base.onCreateView(name, context, attrs)
+        return baseActivity.onCreateView(name, context, attrs)
     }
 
     override fun onCreateView(parent: View?, name: String, context: Context, attrs: AttributeSet): View? {
-        return base.onCreateView(parent, name, context, attrs)
+        return baseActivity.onCreateView(parent, name, context, attrs)
     }
 
     override fun requestDragAndDropPermissions(event: DragEvent?): DragAndDropPermissions {
-        return base.requestDragAndDropPermissions(event)
+        return baseActivity.requestDragAndDropPermissions(event)
     }
 
     override fun isDestroyed(): Boolean {
-        return base.isDestroyed()
+        return baseActivity.isDestroyed()
     }
 
     override fun setVrModeEnabled(enabled: Boolean, requestedComponent: ComponentName) {
-        base.setVrModeEnabled(enabled, requestedComponent)
+        baseActivity.setVrModeEnabled(enabled, requestedComponent)
     }
 
     override fun onPostCreate(savedInstanceState: Bundle?) {
         super.onPostCreate(savedInstanceState)
-        base.onPostCreate(savedInstanceState)
+        baseActivity.onPostCreate(savedInstanceState)
     }
 
     override fun onPostCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
-        base.onPostCreate(savedInstanceState, persistentState)
+        baseActivity.onPostCreate(savedInstanceState, persistentState)
+    }
+
+    override fun getTheme(): Resources.Theme {
+        return baseActivity.getTheme()
     }
 
     override fun onApplyThemeResource(theme: Resources.Theme?, resid: Int, first: Boolean) {
-        base.onApplyThemeResource(theme, resid, first)
+        baseActivity.onApplyThemeResource(theme, resid, first)
     }
 
     override fun startIntentSenderFromChild(child: Activity?, intent: IntentSender?, requestCode: Int, fillInIntent: Intent?, flagsMask: Int, flagsValues: Int, extraFlags: Int) {
-        base.startIntentSenderFromChild(child, intent, requestCode, fillInIntent, flagsMask, flagsValues, extraFlags)
+        baseActivity.startIntentSenderFromChild(child, intent, requestCode, fillInIntent, flagsMask, flagsValues, extraFlags)
     }
 
     override fun startIntentSenderFromChild(child: Activity?, intent: IntentSender?, requestCode: Int, fillInIntent: Intent?, flagsMask: Int, flagsValues: Int, extraFlags: Int, options: Bundle?) {
-        base.startIntentSenderFromChild(child, intent, requestCode, fillInIntent, flagsMask, flagsValues, extraFlags, options)
+        baseActivity.startIntentSenderFromChild(child, intent, requestCode, fillInIntent, flagsMask, flagsValues, extraFlags, options)
     }
 
     override fun onLocalVoiceInteractionStarted() {
-        base.onLocalVoiceInteractionStarted()
+        baseActivity.onLocalVoiceInteractionStarted()
     }
 
     override fun onGetDirectActions(cancellationSignal: CancellationSignal, callback: Consumer<MutableList<DirectAction>>) {
-        base.onGetDirectActions(cancellationSignal, callback)
+        baseActivity.onGetDirectActions(cancellationSignal, callback)
     }
 
     override fun onTrackballEvent(event: MotionEvent?): Boolean {
-        return base.onTrackballEvent(event)
+        return baseActivity.onTrackballEvent(event)
     }
 
     override fun onDetachedFromWindow() {
-        base.onDetachedFromWindow()
+        baseActivity.onDetachedFromWindow()
     }
 
     override fun closeOptionsMenu() {
-        base.closeOptionsMenu()
+        baseActivity.closeOptionsMenu()
     }
 
     override fun finishAndRemoveTask() {
-        base.finishAndRemoveTask()
+        baseActivity.finishAndRemoveTask()
     }
 
     override fun requestVisibleBehind(visible: Boolean): Boolean {
-        return base.requestVisibleBehind(visible)
+        return baseActivity.requestVisibleBehind(visible)
     }
 
     override fun onCreatePanelView(featureId: Int): View? {
-        return base.onCreatePanelView(featureId)
+        return baseActivity.onCreatePanelView(featureId)
     }
 
     override fun onPrepareNavigateUpTaskStack(builder: TaskStackBuilder?) {
-        base.onPrepareNavigateUpTaskStack(builder)
+        baseActivity.onPrepareNavigateUpTaskStack(builder)
     }
 
     override fun startActivityForResult(intent: Intent?, requestCode: Int) {
-        base.startActivityForResult(intent, requestCode)
+        baseActivity.startActivityForResult(intent, requestCode)
     }
 
     override fun startActivityForResult(intent: Intent?, requestCode: Int, options: Bundle?) {
-        base.startActivityForResult(intent, requestCode, options)
+        baseActivity.startActivityForResult(intent, requestCode, options)
     }
 
     override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
-        return base.dispatchTouchEvent(ev)
+        return baseActivity.dispatchTouchEvent(ev)
     }
 
     override fun onCreatePanelMenu(featureId: Int, menu: Menu): Boolean {
-        return base.onCreatePanelMenu(featureId, menu)
+        return baseActivity.onCreatePanelMenu(featureId, menu)
     }
 
     override fun onWindowStartingActionMode(callback: ActionMode.Callback?): ActionMode? {
-        return base.onWindowStartingActionMode(callback)
+        return baseActivity.onWindowStartingActionMode(callback)
     }
 
     override fun onWindowStartingActionMode(callback: ActionMode.Callback?, type: Int): ActionMode? {
-        return base.onWindowStartingActionMode(callback, type)
+        return baseActivity.onWindowStartingActionMode(callback, type)
     }
 
     override fun getLocalClassName(): String {
-        return base.getLocalClassName()
+        return baseActivity.getLocalClassName()
     }
 
     override fun getPreferences(mode: Int): SharedPreferences {
-        return base.getPreferences(mode)
+        return baseActivity.getPreferences(mode)
     }
 
     override fun onStop() {
         super.onStop()
-        base.onStop()
+        baseActivity.onStop()
     }
 
     override fun getCurrentFocus(): View? {
-        return base.getCurrentFocus()
+        return baseActivity.getCurrentFocus()
     }
 
     override fun onRestart() {
         super.onRestart()
-        base.onRestart()
+        baseActivity.onRestart()
     }
 
     override fun startActivityIfNeeded(intent: Intent, requestCode: Int): Boolean {
-        return base.startActivityIfNeeded(intent, requestCode)
+        return baseActivity.startActivityIfNeeded(intent, requestCode)
     }
 
     override fun startActivityIfNeeded(intent: Intent, requestCode: Int, options: Bundle?): Boolean {
-        return base.startActivityIfNeeded(intent, requestCode, options)
+        return baseActivity.startActivityIfNeeded(intent, requestCode, options)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return base.onOptionsItemSelected(item)
+        return baseActivity.onOptionsItemSelected(item)
     }
 
     override fun setIntent(newIntent: Intent?) {
-        base.setIntent(newIntent)
+        baseActivity.setIntent(newIntent)
     }
 
     override fun getFragmentManager(): FragmentManager {
-        return base.getFragmentManager()
+        return baseActivity.getFragmentManager()
     }
 
     override fun getCallingPackage(): String? {
-        return base.getCallingPackage()
+        return baseActivity.getCallingPackage()
     }
 
     override fun showAssist(args: Bundle?): Boolean {
-        return base.showAssist(args)
+        return baseActivity.showAssist(args)
     }
 
     override fun startSearch(initialQuery: String?, selectInitialQuery: Boolean, appSearchData: Bundle?, globalSearch: Boolean) {
-        base.startSearch(initialQuery, selectInitialQuery, appSearchData, globalSearch)
+        baseActivity.startSearch(initialQuery, selectInitialQuery, appSearchData, globalSearch)
     }
 
     override fun finishAfterTransition() {
-        base.finishAfterTransition()
+        baseActivity.finishAfterTransition()
     }
 
     override fun dispatchKeyEvent(event: KeyEvent?): Boolean {
-        return base.dispatchKeyEvent(event)
+        return baseActivity.dispatchKeyEvent(event)
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
-        base.onRestoreInstanceState(savedInstanceState)
+        baseActivity.onRestoreInstanceState(savedInstanceState)
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
-        base.onRestoreInstanceState(savedInstanceState, persistentState)
+        baseActivity.onRestoreInstanceState(savedInstanceState, persistentState)
     }
 
     override fun onPictureInPictureModeChanged(isInPictureInPictureMode: Boolean, newConfig: Configuration?) {
-        base.onPictureInPictureModeChanged(isInPictureInPictureMode, newConfig)
+        baseActivity.onPictureInPictureModeChanged(isInPictureInPictureMode, newConfig)
     }
 
     override fun onPictureInPictureModeChanged(isInPictureInPictureMode: Boolean) {
-        base.onPictureInPictureModeChanged(isInPictureInPictureMode)
+        baseActivity.onPictureInPictureModeChanged(isInPictureInPictureMode)
     }
 
     override fun getContentScene(): Scene {
-        return base.getContentScene()
+        return baseActivity.getContentScene()
     }
 
     override fun onCreateThumbnail(outBitmap: Bitmap?, canvas: Canvas?): Boolean {
-        return base.onCreateThumbnail(outBitmap, canvas)
+        return baseActivity.onCreateThumbnail(outBitmap, canvas)
     }
 
     override fun onMenuItemSelected(featureId: Int, item: MenuItem): Boolean {
-        return base.onMenuItemSelected(featureId, item)
+        return baseActivity.onMenuItemSelected(featureId, item)
     }
 
     override fun invalidateOptionsMenu() {
-        base.invalidateOptionsMenu()
+        baseActivity.invalidateOptionsMenu()
     }
 
     override fun attachBaseContext(newBase: Context?) {
         super.attachBaseContext(newBase)
-        base.attachBaseContext(newBase)
+        baseActivity.attachBaseContext(this)
     }
 
-    override fun getSystemService(name: String): Any? {
-        return base.getSystemService(name)
-    }
+//    override fun getSystemService(name: String): Any? {
+//        return baseActivity.getSystemService(name)
+//    }
 
     override fun showLockTaskEscapeMessage() {
-        base.showLockTaskEscapeMessage()
+        baseActivity.showLockTaskEscapeMessage()
     }
 
     override fun onKeyUp(keyCode: Int, event: KeyEvent?): Boolean {
-        return base.onKeyUp(keyCode, event)
+        return baseActivity.onKeyUp(keyCode, event)
     }
 
     override fun setFinishOnTouchOutside(finish: Boolean) {
-        base.setFinishOnTouchOutside(finish)
+        baseActivity.setFinishOnTouchOutside(finish)
+    }
+
+    override fun getResources(): Resources {
+        return baseActivity.resources
     }
 }

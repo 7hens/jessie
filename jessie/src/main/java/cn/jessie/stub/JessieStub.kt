@@ -14,14 +14,14 @@ object JessieStub {
     private const val STUB_PROVIDER = "cn.jessie.runtime.app.provider.JessieStubProvider"
 
     abstract class BaseActivity : ActivityWrapper() {
-        override val base by lazy { JessieRuntime.create<Activity>(STUB_ACTIVITY) }
+        override val baseActivity by lazy { JessieRuntime.create<Activity>(STUB_ACTIVITY) }
     }
 
     abstract class BaseService : ServiceWrapper() {
-        override val base by lazy { JessieRuntime.create<Service>(STUB_SERVICE) }
+        override val baseService by lazy { JessieRuntime.create<Service>(STUB_SERVICE) }
     }
 
     abstract class BaseProvider : ContentProviderWrapper() {
-        override val base by lazy { JessieRuntime.create<ContentProvider>(STUB_PROVIDER) }
+        override val baseProvider by lazy { JessieRuntime.create<ContentProvider>(STUB_PROVIDER) }
     }
 }

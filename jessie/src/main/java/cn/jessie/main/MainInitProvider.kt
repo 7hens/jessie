@@ -7,7 +7,7 @@ import android.content.pm.ProviderInfo
 import cn.jessie.JessieRuntime
 
 class MainInitProvider : ContentProviderWrapper() {
-    override val base: ContentProvider by lazy { JessieRuntime.mainProvider }
+    override val baseProvider: ContentProvider by lazy { JessieRuntime.mainProvider }
 
     override fun attachInfo(context: Context?, info: ProviderInfo?) {
         JessieRuntime.initialize(context!!)

@@ -12,7 +12,7 @@ import cn.jessie.JessieRuntime
  * 用来和其他进程交互，并传递 Binder。
  */
 class JessieDaemonProvider : ContentProviderWrapper() {
-    override val base: ContentProvider by lazy { JessieRuntime.daemonProvider }
+    override val baseProvider: ContentProvider by lazy { JessieRuntime.daemonProvider }
 
     override fun attachInfo(context: Context?, info: ProviderInfo?) {
         JessieRuntime.initialize(context!!)

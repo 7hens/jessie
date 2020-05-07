@@ -1,4 +1,4 @@
-package cn.thens.jessie
+package cn.thens.jessie.runtime
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
