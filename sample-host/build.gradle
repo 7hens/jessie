@@ -70,6 +70,6 @@ task installPlugin {
     }
 }
 
-afterEvaluate {
-    tasks.preBuild.dependsOn rootProject.tasks.findByPath(":jessie:upgradeRuntime")
-}
+//afterEvaluate {
+//    tasks.preBuild.dependsOn rootProject.tasks.findByPath(":jessie:upgradeRuntime")
+//}

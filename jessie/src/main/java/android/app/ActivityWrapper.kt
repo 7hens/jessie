@@ -3,6 +3,7 @@ package android.app
 import android.annotation.SuppressLint
 import android.app.assist.AssistContent
 import android.content.*
+import android.content.res.AssetManager
 import android.content.res.Configuration
 import android.content.res.Resources
 import android.database.Cursor
@@ -913,11 +914,15 @@ abstract class ActivityWrapper : Activity() {
         return baseActivity.onKeyUp(keyCode, event)
     }
 
-    override fun setFinishOnTouchOutside(finish: Boolean) {
-        baseActivity.setFinishOnTouchOutside(finish)
-    }
-
     override fun getResources(): Resources {
         return baseActivity.resources
+    }
+
+    override fun getAssets(): AssetManager {
+        return baseActivity.assets
+    }
+
+    override fun getClassLoader(): ClassLoader {
+        return baseActivity.classLoader
     }
 }
