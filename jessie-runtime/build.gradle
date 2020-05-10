@@ -23,8 +23,6 @@ android {
 
 }
 
-import com.android.tools.r8.D8
-
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
@@ -37,49 +35,4 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
-}
-
-
-afterEvaluate {
-    android.libraryVariants.forEach { variant ->
-        def variantName = variant.name.capitalize()
-        tasks.create("make${variantName}Dex") {
-            group 'jessie'
-            dependsOn "assemble${variantName}"
-            outputs.files(new File(project.buildDir, "outputs/jar/${project.name}-${variant.name}.jar"))
-            doLast {
-                def output = outputs.files.first()
-
-                def args = new ArrayList<String>()
-                variant.packageLibraryProvider.get().inputs.files.forEach { file ->
-                    if (file.name.endsWith(".jar")) {
-                        args.add(file.absolutePath)
-                    }
-                }
-                android.bootClasspath.forEach {
-                    args.add("--lib")
-                    args.add(it.absolutePath)
-                }
-                variant.javaCompileProvider.get().classpath.forEach { file ->
-                    if (file.name.endsWith(".jar")) {
-                        args.add("--lib")
-                        args.add(file.absolutePath)
-                    }
-                }
-                variant.javaCompileProvider.get().outputs.files.forEach { file ->
-                    args.add("--classpath")
-                    args.add(file.absolutePath)
-                }
-                if (project.pluginManager.hasPlugin("kotlin-android")) {
-                    project.tasks.getByPath("compile${variantName}Kotlin").outputs.files.forEach {
-                        args.add("--classpath")
-                        args.add(it.absolutePath)
-                    }
-                }
-                args.add("--output")
-                args.add(output.absolutePath)
-                D8.main(args.toArray(new String[0]))
-            }
-        }
-    }
 }

@@ -3,7 +3,6 @@ apply plugin: 'kotlin-android'
 apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'maven-publish'
 apply from: 'components.gradle'
-//apply from: 'jessie.gradle'
 
 group = "com.github.7hens"
 version = "-SNAPSHOT"
@@ -45,3 +44,16 @@ dependencies {
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 }
+
+def createUpgradeTask = { String name, String project ->
+    def dependency = rootProject.tasks.findByPath(":$project:dexDebug")
+    def outputDir = file("src/main/assets/jessie")
+    task(type: Jar, dependsOn: dependency.path, group: 'jessie', name) {
+        from dependency.outputs.files.singleFile
+        archiveFileName = "${project}.jar"
+        destinationDirectory = outputDir
+    }
+}
+
+createUpgradeTask('upgradeHook', 'android-hook')
+createUpgradeTask('upgradeRuntime', 'jessie-runtime')
