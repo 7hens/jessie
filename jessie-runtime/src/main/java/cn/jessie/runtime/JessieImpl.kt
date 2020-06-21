@@ -6,6 +6,7 @@ import android.content.*
 import android.os.Build
 import android.os.Bundle
 import android.os.Process
+import android.util.LruCache
 import cn.jessie.Jessie
 import cn.jessie.program.Program
 import cn.jessie.runtime.app.MyProgram
@@ -24,7 +25,7 @@ object JessieImpl : Jessie {
 
     private val programManager get() = JessieServices.programManager
 
-    private val programsInternal = hashMapOf<String, Program>()
+    private val programCache = LruCache<String, Program>(128)
 
     override val hostProgram: Program by lazy {
         AppProgram(MainAppContext.get())
@@ -34,19 +35,18 @@ object JessieImpl : Jessie {
 
     override val programs: Map<String, Program>
         get() {
-            // FIXME 删除后需要刷新
             val remoteProgramPackageNames = programManager.getProgramPackageNames()
-            if (programsInternal.size != remoteProgramPackageNames.size) {
-                for (programPackageName in remoteProgramPackageNames) {
-                    if (programsInternal.containsKey(programPackageName)) continue
-                    programsInternal[programPackageName] = RemoteProgram(programPackageName)
+            val result = hashMapOf<String, Program>()
+            for (packageName in remoteProgramPackageNames) {
+                result[packageName] = programCache.get(packageName) ?: run {
+                    RemoteProgram(packageName).also { programCache.put(packageName, it) }
                 }
             }
-            return programsInternal
+            return result
         }
 
     override fun getProgram(packageName: String): Program? {
-        return programs[packageName]
+        return if (containsProgram(packageName)) RemoteProgram(packageName) else null
     }
 
     override fun containsProgram(packageName: String): Boolean {

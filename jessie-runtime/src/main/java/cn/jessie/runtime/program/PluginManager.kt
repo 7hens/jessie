@@ -13,13 +13,13 @@ import java.util.concurrent.ConcurrentHashMap
 /**
  * @author 7hens
  */
-class PluginManager(private val pluginDir: File) {
+class PluginManager(private val programRootDir: File) {
 
-    private val plugins: MutableMap<String, Program> = ConcurrentHashMap()
+    private val programs: MutableMap<String, Program> = ConcurrentHashMap()
 
     fun all(): Map<String, Program> {
         Processes.checkDaemon()
-        return plugins
+        return programs
     }
 
     fun install(apk: File): Program {
@@ -34,33 +34,33 @@ class PluginManager(private val pluginDir: File) {
         val packageInfo = packageManager.getPackageArchiveInfo(apkPath, 0)
                 ?: throw RuntimeException("install error, packageInfo is null, apkPath: $apkPath")
         val packageName = packageInfo.packageName
-        val appDir = Files.dir(File(pluginDir, packageName))
-        val newApk = File(appDir, BASK_APK)
+        val programDir = Files.dir(File(programRootDir, packageName))
+        val newApk = File(programDir, BASK_APK)
         if (!newApk.exists()) newApk.createNewFile()
         val newApkPath = newApk.absolutePath
         val isNewApk = apkPath != newApkPath
         val isSameApk = !isNewApk || apk.length() == newApk.length()
-        if (plugins.containsKey(packageName) && isSameApk) {
-            return plugins.getValue(packageName)
+        if (programs.containsKey(packageName) && isSameApk) {
+            return programs.getValue(packageName)
         }
         if (isNewApk) apk.copyTo(newApk, true)
         val program = PluginProgram(packageName, DexInstaller.install(newApk, isNewApk))
-        plugins[packageName] = program
+        programs[packageName] = program
         return program
     }
 
     fun installAll() {
-        for (appDir in pluginDir.listFiles()) {
+        for (programDir in programDirs) {
             try {
-                val packageName = appDir.name
-                val apkFile = File(appDir, BASK_APK)
+                val packageName = programDir.name
+                val apkFile = File(programDir, BASK_APK)
                 if (!(apkFile.exists() && apkFile.isFile && apkFile.length() > 0L)) {
-                    val result = Files.delete(appDir)
+                    val result = Files.delete(programDir)
                     JCLogger.error("program($packageName) is missing, removed $result")
                     continue
                 }
                 val dexInfo = DexInstaller.install(apkFile, false)
-                plugins[packageName] = PluginProgram(packageName, dexInfo)
+                programs[packageName] = PluginProgram(packageName, dexInfo)
 //                Logdog.debug("install inner program($packageName)")
             } catch (e: Throwable) {
                 JCLogger.error(e)
@@ -70,18 +70,20 @@ class PluginManager(private val pluginDir: File) {
     }
 
     fun uninstall(packageName: String): Boolean {
-        val appDir = File(pluginDir, packageName)
-        if (!appDir.exists()) return true
-        return Files.delete(appDir)
+        val programDir = File(programRootDir, packageName)
+        if (!programDir.exists()) return true
+        return Files.delete(programDir)
     }
 
     fun uninstallAll(): Boolean {
         var result = true
-        for (appDir in pluginDir.listFiles()) {
-            result = result && Files.delete(appDir)
+        for (programDir in programDirs) {
+            result = result && Files.delete(programDir)
         }
         return result
     }
+
+    private val programDirs get() = programRootDir.listFiles() ?: emptyArray()
 
     companion object {
         private const val BASK_APK = "base.jar"
