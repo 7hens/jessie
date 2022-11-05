@@ -31,8 +31,8 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation project(':jessie')
-//    implementation 'com.github.7hens:jessie:0.2'
+    implementation project(':jessie-core')
+//    implementation 'com.github.7hens:jessie-core:0.2'
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'androidx.appcompat:appcompat:1.1.0-rc01'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
@@ -71,6 +71,6 @@ task installPlugin {
 }
 
 afterEvaluate {
-    tasks.preBuild.dependsOn rootProject.tasks.findByPath(":jessie:upgradeHook")
-    tasks.preBuild.dependsOn rootProject.tasks.findByPath(":jessie:upgradeRuntime")
+    tasks.preBuild.dependsOn rootProject.tasks.findByPath(":jessie-core:upgradeHook")
+    tasks.preBuild.dependsOn rootProject.tasks.findByPath(":jessie-core:upgradeRuntime")
 }
